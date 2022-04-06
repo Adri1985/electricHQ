@@ -6,65 +6,195 @@
 <head>
     <!--inserto el css-->
     <link rel="stylesheet" href="../estilos/estilos.css">
+    <link rel="stylesheet" href="../estilos/bootstrap.min.css">
+    <script src="../js/bootstrap.min.js"></script>
     <!--cabecera o datos importantes del sitio que no se veran el el navegador-->
     <meta charset="UTF-8">
     <!--etiqueta charset UTF 8. Sirve para que los caracteres especiales como ñ u otras cosas raras se visualice correctamente-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- es para que sea compatible en edge y explorer-->
-   
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- esto nos va a permitir la avadaptacion a los dispositivos moviles-->
     <title>COMUNITY - ELECTRIC HQ</title>
 </head>
 
 <body class="body">
-    <!-- es el cuerpo de nuestro sitio, todo tiene que estar comprendido en el body-->
-    <header class="header">
-        <ul>
-            <li><a href="../pages/products.html">Products</a></li>
-            <li><a href="../pages/community.html">Comunity</a></li>
-            <li><a href="../pages/prototypes.html">Prototypes</a></li>
-            <li><a href="../pages/team.html">Team</a></li>
-            <li><a href="../pages/contact.html">Contact</a></li>
-           <!-- <div class="prueba">
-                <a href="index.html"><img src="images/logo.png" alt=""></a>
-            </div>-->
-        </ul> 
-    </header>
-    <main class="main">
-    
-        <div class="titulo">
-    
-            <a href="../index.html"><img id="logo" src="../images/logo.png" alt=""></a>
-            <h1>Comunity</h1>
-    
-    
+    <div class="container">
+        <div class="row">
+            <header class="header col-12">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="../index.html">
+                            <img src="../images/logo.png" alt="" width="30" height="24"
+                                class="d-inline-block align-text-top">
+                            ELECTRIC-HQ
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/products.html">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page"
+                                        href="../pages/community.html">Comunity</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/prototypes.html">Prototypes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/team.html">Team</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
         </div>
-        <div class="bodyColumn">
-            <img src="../images/comunity.jpeg" alt="">
-            <p>We are a growing community with the intention to push forward and develop sustentable and fun mobility. Join
-                us
-                on our many group rides around the city</p>
-            <img src="../images/map.jpeg" alt="">
-            <br>
-            <!--ver porque aca no me hace display block-->
-            <input type="submit" value="Find rides nearby">
-    
+
+        <div class="row">
+            <div class="main col-12">
+
+                <div class="titulo">
+
+                    <h1>OUR COMUNITY</h1>
+                    <p>Check out our customers review and make your own! </p>
+
+                </div>
+                <div>
+                </div>
+                <div class="main row">
+                    <div id="carouselExampleInterval" class="carousel slide col-lg-6 col-md-12 col-xs-12"
+                        data-bs-ride="carousel">
+                        <p>Our latest reviews</p>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="10000">
+                                <div class="card" style="width: 100%">
+                                    <img class="review" src="../images/review0.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Adrian C</h5>
+                                        <img src="../images/stars.png" alt="">
+                                        <p class="card-text">I have loved the meepo mini 2 since the first day.
+                                            I recomend it for intermediate to advanced riders.</p>
+                                        <h5 class="card-title">Product: Meepo mini 2</h6>
+                                            <a href="#" class="btn btn-warning">SHOP NOW!</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" data-bs-interval="2000">
+                                <div class="card" style="width: 100%">
+                                    <img class="review" src="../images/review1.jpeg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Lucas F</h5>
+                                        <img src="../images/stars.png" alt="">
+                                        <p class="card-text">This scooter is all I ever wanted. It has the power all the
+                                            power and range
+                                            I needed.</p>
+                                        <h5 class="card-title">Product: Nanrobot D6 Electric scooter</h6>
+                                            <a href="#" class="btn btn-warning">SHOP NOW!</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="card" style="width: 100%">
+                                    <img class="review" src="../images/review2.jpeg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Carolina V</h5>
+                                        <img src="../images/stars.png" alt="">
+                                        <p class="card-text">
+                                            Very good strong bike.
+                                            750w very powerful.
+                                            Nice smooth transaction.
+                                            Good communication.
+                                            The only thing is the display is smaller than shown on a picture.
+                                            Also there's no bell.
+                                            But they sent it later..</p>
+                                        <h5 class="card-title">Product: Rattan LM 750W Electric Bike</h6>
+                                            <a href="#" class="btn btn-warning">SHOP NOW!</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="card" style="width: 100%">
+                                    <img class="review" src="../images/review5.webp" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Maria C</h5>
+                                        <img src="../images/stars.png" alt="">
+                                        <p class="card-text">
+                                            Super fun to conmute across my city. WARNING: it goes super fast, PLEASE
+                                            WEAR A HELMET!</p>
+                                        <h5 class="card-title">Product: BOOSTEDBOARD Extended Range</h6>
+                                            <a href="#" class="btn btn-warning">SHOP NOW!</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-xs-12">
+                        <div class="mb-3">
+                            <p>Share your experience with the comunity!</p>
+                            <select class="form-select form-select-lg" aria-label="Default select example">
+                                <option selected>Vehicle type</option>
+                                <option value="1">Electric Scooters</option>
+                                <option value="2">Electric Skateboards</option>
+                                <option value="3">Electric Surfboards</option>
+                                <option value="3">Electric Bikes</option>
+                                <option value="3">One Wheel (new!)</option>
+                            </select>
+                            <select class="form-select form-select-lg" aria-label="Default select example">
+                                <option selected>Product name</option>
+                                <option value="1">BOOSTEDBOARD Extended Range</option>
+                                <option value="2">Meepo Mini 2</option>
+                                <option value="3">Rattan LM 750W Electric Bike</option>
+                                <option value="3">Nanrobot D6 Electric scooter</option>
+                            </select>
+                            <label for="customRange1" class="form-label">Rating (1 to 10)</label>
+                            <input type="range" class="form-range" id="customRange1">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="23"></textarea>
+                            <a href="#" class="btn btn-warning">Submit review</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
-    <footer class="footer">
-            <ul>
-                <li>COPYRIGHT</li>
-                <li>INVEST</li>
-                <li>PRIVACY POLICY</li>
-                <li>TERMS AND CONDITIONS</li>           
-             </ul>
-        <div class ="footer__platforms">
-            <img src="../images/instagram.png" alt="" width="50" height="50">
-            <img src="../images/facebook.png" alt="" width="50" height="50">
-            <img src="../images/youtube.png" alt="" width="50" height="50">
+
+
+        <div class="row">
+            <footer class="footer col-12">
+                <label for="">COPYRIGHT</label>
+                <label for="">INVEST</label>
+                <label for="">TERMS AND CONDITIONS</label>
+                <label for="">PRIVACY</label>
+            </footer>
         </div>
-    </footer>
+        <div class="row">
+            <footer class="footer col-12">
+                <div class="footer__platforms">
+                    <img src="../images/instagram.png" alt="" width="50" height="50">
+                    <img src="../images/facebook.png" alt="" width="50" height="50">
+                    <img src="../images/youtube.png" alt="" width="50" height="50">
+                </div>
+            </footer>
+        </div>
+    </div>
 </body>
 
 </html>
-

@@ -6,11 +6,13 @@
 <head>
     <!--inserto el css-->
     <link rel="stylesheet" href="../estilos/estilos.css">
+    <link rel="stylesheet" href="../estilos/bootstrap.min.css">
+    <script src="../js/bootstrap.min.js"></script>
     <!--cabecera o datos importantes del sitio que no se veran el el navegador-->
     <meta charset="UTF-8">
     <!--etiqueta charset UTF 8. Sirve para que los caracteres especiales como ñ u otras cosas raras se visualice correctamente-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- es para que sea compatible en edge y explorer-->
-   
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- esto nos va a permitir la avadaptacion a los dispositivos moviles-->
     <title>ELECTRIC HQ</title>
@@ -18,281 +20,237 @@
 
 <body class="body">
     <!-- es el cuerpo de nuestro sitio, todo tiene que estar comprendido en el body-->
-    <header class="header">
-        <ul>
-            <li><a href="../pages/products.html">Products</a></li>
-            <li><a href="../pages/community.html">Comunity</a></li>
-            <li><a href="../pages/prototypes.html">Prototypes</a></li>
-            <li><a href="../pages/team.html">Team</a></li>
-            <li><a href="../pages/contact.html">Contact</a></li>
-           <!-- <div class="prueba">
-                <a href="index.html"><img src="images/logo.png" alt=""></a>
-            </div>-->
-        </ul> 
-    </header>
-    <main class="main">
+    <div class="container">
+        <div class="row">
+            <header class="header col-12">
 
-        <div class="titulo">
-
-        <a href="../index.html"><img id="logo" src="../images/logo.png" alt=""></a>
-        <h1>PRODUCTS</h1>
-       
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="../index.html">
+                            <img src="../images/logo.png" alt="" width="30" height="24"
+                                class="d-inline-block align-text-top">
+                            ELECTRIC-HQ
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page"
+                                        href="pages/products.html">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/community.html">Comunity</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/prototypes.html">Prototypes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/team.html">Team</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
 
         </div>
-        <section class="mainSection">
-          
-            <form class="form" action="">
-                <ul>
-                    <li>
-                        <label for="type">Vehicle type </label>
-                        <select name="type" id="type" >
-                            <option value="sco">Electric Scooters</option>
-                            <option value="ska">Electric Skateboards</option>
-                            <option value="ska">Electric Surfboards</option>
-                            <option value="ska">Electric Bikes</option>
-                            <option value="ska">One Wheel (new!)</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="ship">Ship To: </label>
-                        <select name="ship" id="">
-                            <option value="arg">Argentina</option>
-                            <option value="chi">Chile</option>
-                            <option value="bra">Brazil</option>
-                            <option value="usa">United States</option>
-                        </select>
-                    </li>
-    
-                    <!-- RADIO -- ELEGIR SOLO UNA OPCION-->
-                    <li>
-                        <label for="condition">Condition:</label>
-                    </li>
-                    <li>
-                        <input type="radio" value="new" name="new">New
-                        <input type="radio" value="pre" name="preowned">Pre-Owned
-                    </li>
-                    <li>
-                        <input type="text" id="" placeholder="min price">
-                        <input type="text" id="" placeholder="min price">
-                    <li>
-    
-                    </li>
-                    <input type="text" id="" placeholder="min range">
-                    <input type="text" id="" placeholder="max range">
-                    </li>
-                    </li>
-                    <input type="submit" value="Search">
-                    </li>
-                </ul>
-            </form>
-        </section>
-        <div class="products">
-            <div class="product">
-                <img src="../images/product1.png" alt="">
-                <ul>
-                    <li>Evolve Hadean Carbon 2 in 1</li>
-                    <li>Top Features Include:</li>
-                    <ul>
-                        <li>
-                            AT and Sreet wheels
-                        </li>
-                        <li>
-                            30mph top speed
-                        </li>
-                        <li>
-                            35% hill climbing ability
-                        </li>
-                        <li>
-                            Dual 3000W motors
-                        </li>
-                    </ul>
+        <div class="row">
+            <div class="form col-12">
 
-                </ul>
+                    <label for="type">Vehicle type </label>
+                    <select class="form-select form-select-lg" aria-label="Default select example">
+                        <option selected>Vehicle type</option>
+                        <option value="1">Electric Scooters</option>
+                        <option value="2">Electric Skateboards</option>
+                        <option value="3">Electric Surfboards</option>
+                        <option value="3">Electric Bikes</option>
+                        <option value="3">One Wheel (new!)</option>
+                    </select>
+                    <label for="type">Ship to </label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Ship to</option>
+                        <option value="1">Argentina</option>
+                        <option value="2">Brazil</option>
+                        <option value="3">Uruguay</option>
+                        <option value="3">Chile</option>
+                        <option value="3">Outside LATAM</option>
+                    </select>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="form-check-label myCheck" for="inlineCheckbox1">New</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                        <label class="form-check-label myCheck" for="inlineCheckbox2">Pre-Owned</label>
+                    </div>
+                    <input type="text" id="" placeholder="min price">
+                    <input type="text" id="" placeholder="min price">
+                <input type="text" id="" placeholder="min range">
+                <input type="text" id="" placeholder="max range">
+                <button type="button" class="btn btn-warning">Search</button> </div>
+        <main class="row"> 
+            <div class="products col-12">
+                <div class="product">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../images/product1.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Evolve Hadean Carbon 2</h5>
+                          <p class="card-text">Top features include:</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">AT and Sreet wheels</li>
+                          <li class="list-group-item">30mph top speed</li>
+                          <li class="list-group-item">35% hill climbing ability</li>
+                        </ul>
+                        <a href="#" class="btn btn-warning">BUY NOW</a>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../images/product2.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Meepo V4 Shuffle</h5>
+                          <p class="card-text">Top features include:</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Dual 620W motors</li>
+                          <li class="list-group-item">Weight 16 lbs</li>
+                          <li class="list-group-item">New M4S remote</li>
+                        </ul>
+                        <a href="#" class="btn btn-warning">BUY NOW</a>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../images/product3.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">New Meepo Mini 2 Standard</h5>
+                          <p class="card-text">Top features include:</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">29 mph top speed</li>
+                          <li class="list-group-item">versatile deck</li>
+                          <li class="list-group-item">18 miles range</li>
+                        </ul>
+                        <a href="#" class="btn btn-warning">BUY NOW</a>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../images/product4.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Eunorau FAT-HS 1000</h5>
+                          <p class="card-text">Top features include:</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Shimano Deore 9-speed shifter</li>
+                          <li class="list-group-item">1000W Bafang motor</li>
+                          <li class="list-group-item">40-mile range</li>
+                        </ul>
+                        <a href="#" class="btn btn-warning">BUY NOW</a>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../images/product5.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Jupiter Defiant</h5>
+                          <p class="card-text">Top features include:</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">300 lbs payload capacity</li>
+                          <li class="list-group-item">Front & rear disc brakes</li>
+                          <li class="list-group-item">750W brushless hub motor</li>
+                        </ul>
+                        <a href="#" class="btn btn-warning">BUY NOW</a>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../images/product6.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Rambo Bushwacker</h5>
+                          <p class="card-text">Top features include:</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Rambo Custom built chain rim</li>
+                          <li class="list-group-item">Digital on-board display</li>
+                          <li class="list-group-item">Tektro hydraulic piston brakes</li>
+                        </ul>
+                        <a href="#" class="btn btn-warning">BUY NOW</a>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../images/product7.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Yamaha RDS300</h5>
+                          <p class="card-text">Top features include:</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"> Run up to 1.5 hours</li>
+                          <li class="list-group-item">Rated to 100ft / 30m</li>
+                          <li class="list-group-item">Waterproof construction</li>
+                        </ul>
+                        <a href="#" class="btn btn-warning">BUY NOW</a>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../images/product8.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Radinn Carve Surfboard</h5>
+                          <p class="card-text">Top features include:</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Jetpack G3</li>
+                          <li class="list-group-item">Acceleration: 0-25 in 9.7s</li>
+                          <li class="list-group-item">Board Weight: 20 lbs</li>
+                        </ul>
+                        <a href="#" class="btn btn-warning">BUY NOW</a>
+                    </div>
+                </div>
             </div>
-            <div class="product">
-                <img src="../images/product2.png" alt="">
-                <ul>
-                    <li>Meepo V4 Shuffle</li>
-                    <li>Top Features Include:</li>
-                    <ul>
-                        <li>
-                            Dual 620W motors
-                        </li>
-                        <li>
-                            Weight 16 lbs
-                        </li>
-                        <li>
-                            New M4S remote
-                        </li>
-                        <li>
-                            28 mph top speed
-                        </li>
-                    </ul>
-
-                </ul>
+        </main>
+        <div class="row">           
+            <div class="bestSellers col-lg-3 col-md-6 col-xs 12">
+                    <img src="../images/bestskate.png" alt="">
             </div>
-            <div class="product">
-                <img src="../images/product3.png" alt="">
-                <ul>
-                    <li>New Meepo Mini 2 Standard</li>
-                    <li>Top Features Include:</li>
-                    <ul>
-                        <li>
-                            29 mph top speed
-                        </li>
-                        <li>
-                            versatile deck
-                        </li>
-                        <li>
-                            18 miles range
-                        </li>
-                        <li>
-                            requires riding experience
-                        </li>
-                    </ul>
-
-                </ul>
-            </div>
-            <div class="product">
-                <img src="../images/product4.png" alt="">
-                <ul>
-                    <li>Eunorau FAT-HS 1000</li>
-                    <li>Top Features Include:</li>
-                    <ul>
-                        <li>
-                            Shimano Deore 9-speed shifter
-                        </li>
-                        <li>
-                            1000W Bafang motor
-                        </li>
-                        <li>
-                            40-mile range
-                        </li>
-                        <li>
-                            Full suspension & shock absorber
-                        </li>
-                    </ul>
-
-                </ul>
-            </div>
-            <div class="product">
-                <img src="../images/product5.png" alt="">
-                <ul>
-                    <li>Jupiter Defiant</li>
-                    <li>Top Features Include:</li>
-                    <ul>
-                        <li>
-                            300 lbs payload capacity
-                        </li>
-                        <li>
-                            Front & rear disc brakes
-                        </li>
-                        <li>
-                            40-mile range
-                        </li>
-                        <li>
-                            750W brushless hub motor
-                        </li>
-                    </ul>
-
-                </ul>
-            </div>
-            <div class="product">
-                <img src="../images/product6.png" alt="">
-                <ul>
-                    <li>Rambo Bushwacker</li>
-                    <li>Top Features Include:</li>
-                    <ul>
-                        <li>
-                            Rambo Custom built chain rim
-                        </li>
-                        <li>
-                            Digital on-board display
-                        </li>
-                        <li>
-                            Tektro hydraulic piston brakes
-                        </li>
-                        <li>
-                            300 lbs weight capacity
-                        </li>
-                    </ul>
-
-                </ul>
-            </div>
-            <div class="product">
-                <img src="../images/product7.png" alt="">
-                <ul>
-                    <li>Yamaha RDS300 Seascooter</li>
-                    <li>Top Features Include:</li>
-                    <ul>
-                        <li>
-                            Run up to 1.5 hours with normal use 
-                        </li>
-                        <li>
-                            Rated to 100ft / 30m
-                        </li>
-                        <li>
-                            Speed up to 3 mph / 4.8 km/h
-                        </li>
-                        <li>
-                            Waterproof construction 
-                        </li>
-                    </ul>
-
-                </ul>
-              
-            </div>
-            <div class="product">
-                <img src="../images/product8.png" alt="">
-                <ul>
-                    <li>Radinn Carve Electric Surfboard</li>
-                    <li>Top Features Include:</li>
-                    <ul>
-                        <li>
-                            Jetpack G3 
-                        </li>
-                        <li>
-                            Top Speed: Up to 26 mph 
-                        </li>
-                        <li>
-                            (Standard) Acceleration: 0-25 in 9.7s
-                        </li>
-                        <li>
-                            Board Weight: 20 lbs 
-                        </li>
-                    </ul>
-
-                </ul>
-            </div>
-            
-        </div>
-        <div class="bestSellers">
-        
-            <h1>BEST SELLERS</h1>
-            <div class="bestImages">
-                <img src="../images/bestskate.png" alt="">
+            <div class="bestSellers col-lg-3 col-md-6 col-xs 12">
                 <img src="../images/bestbike.png" alt="">
+            </div>
+            <div class="bestSellers col-lg-3 col-md-6 col-xs 12">
                 <img src="../images/bestscooter.png" alt="">
+            </div>
+            <div class="bestSellers col-lg-3 col-md-6 col-xs 12">
                 <img src="../images/bestdeliverybike.png" alt="">
             </div>
         </div>
-
-        
-    </main>
-    <footer class="footer">
-            <ul>
-                <li>COPYRIGHT</li>
-                <li>INVEST</li>
-                <li>PRIVACY POLICY</li>
-                <li>TERMS AND CONDITIONS</li>           
-             </ul>
-        <div class ="footer__platforms">
-            <img src="../images/instagram.png" alt="" width="50" height="50">
-            <img src="../images/facebook.png" alt="" width="50" height="50">
-            <img src="../images/youtube.png" alt="" width="50" height="50">
+        <div class="row">
+            <footer class="footer col-12">
+                <label for="">COPYRIGHT</label>
+                <label for="">INVEST</label>
+                <label for="">TERMS AND CONDITIONS</label>
+                <label for="">PRIVACY</label>
+            </footer>
         </div>
-    </footer>
+        <div class="row">
+            <footer class="footer col-12">
+                <div class="footer__platforms">
+                    <img src="../images/instagram.png" alt="" width="50" height="50">
+                    <img src="../images/facebook.png" alt="" width="50" height="50">
+                    <img src="../images/youtube.png" alt="" width="50" height="50">
+                </div>
+            </footer>
+        </div>
+    </div>
 </body>
 
 </html>
-
