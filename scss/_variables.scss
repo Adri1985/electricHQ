@@ -1,3 +1,19 @@
-$mainColor: #363636;
+$commonColors:(
+    mainColor: #363636,
+    titlesColor: rgb(204, 204, 204)
+);
 
-$titlesColor: rgb(204, 204, 204);
+
+@mixin customDisplay ($display, $direction){
+    display: $display;
+    flex-direction: $direction;
+}
+
+
+
+    
+
+
+
+
+/*rgb(204, 204, 204)*/

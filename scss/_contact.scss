@@ -12,11 +12,9 @@
 
 .contactForm{
     grid-area: contactForm;
-    display: flex;
-    flex-direction: column;
+    @include customDisplay(flex, column);
     ul{
-        display: flex;
-        flex-direction: column;
+        @include customDisplay(flex, column);
         li{
             textarea{
                 width:500px;
@@ -29,8 +27,7 @@
 
 .contactInfo{
     grid-area: contactInfo;
-    display: flex;
-    flex-direction: column;
+    @include customDisplay(flex, column);
     align-items:flex-end;
     justify-content: center;
 }
@@ -42,8 +39,7 @@
 
 .location{
     grid-area:location;
-    display: flex;
-    flex-direction: column;
+    @include customDisplay(flex, column);
     align-items:flex-end;
     justify-content: center;
 }

@@ -106,8 +106,7 @@
    
 
     .titulo{
-        display: flex;
-        flex-direction: column;
+        @include customDisplay(flex, column);
         align-items: center;
         justify-content: center;
     }
@@ -117,29 +116,25 @@
         flex-direction: column;
     }
     .bestSellers {
-        display: flex;
-        flex-direction: column;
+        @include customDisplay(flex, column);
         align-items: center;
     }
 
     .contact{
-        display: flex;
-        flex-direction: column;
+        @include customDisplay(flex, column);
         align-items: center;
         justify-content: center;
     }
     
     .contactForm{
         
-        display: flex;
-        flex-direction: column;
+        @include customDisplay(flex, column);
         align-items: center;
         justify-content: center;
         align-self: center;
         ul{
             li{
-                display: flex;
-                flex-direction: column;
+                @include customDisplay(flex, column);
                 align-items: center;
                 justify-content: center;
                 align-self: center;
@@ -149,8 +144,7 @@
     }
 
     .form{
-        display: flex;
-        flex-direction: column;
+        @include customDisplay(flex, column);
         ul{
             display: flex;
             align-items: center;

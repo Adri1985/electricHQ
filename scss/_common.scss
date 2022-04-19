@@ -1,12 +1,11 @@
 .body{
 
-    background-color: $mainColor;
+    background-color: map-get($commonColors , mainColor);
 
 }
 
 .main{
-    display: flex;
-    flex-direction: row;
+    @include customDisplay(flex, row);
     flex-wrap: wrap;
     justify-content: center; 
     text-align: center;
@@ -27,14 +26,13 @@
     p{
         font-family: Arial, Helvetica, sans-serif;
         font-size: 100%;
-        color: $titlesColor;
+        color: map-get($commonColors, titlesColor);
     }
 }
 
 .titulo{
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    @include customDisplay(flex, column);
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -45,11 +43,11 @@
     }
 }
 h1{
-    color: $titlesColor;
+    color: map-get($commonColors, titlesColor);
 }
 
 h6{
-    color: $titlesColor;
+    color:  map-get($commonColors, titlesColor);
 }
 
 .imagenes{
@@ -58,7 +56,7 @@ h6{
     justify-content: space-around;
     padding-bottom: 20px;
 }
-.imagen__grande{
+.imagen--grande{
     width: 100%;
     justify-content: space-around;
     a{
@@ -72,12 +70,12 @@ h6{
     
 }
 
-.imagenes__pequeñas{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+
+/*extendiendo de imagen--grande los atributos width y justify content, el resto se sobreescribe*/
+.imagenes--pequeñas{
+    @extend .imagen--grande;
+    height: 100%; 
+    @include customDisplay(flex, column);
     justify-items: center;
     a{
         height: 100%;
@@ -94,9 +92,8 @@ h6{
 }
 
 .bestSellers{
-    display:flex;
+    @include customDisplay(flex, column);
     justify-content: center;
-    flex-direction: column;
     align-items: center;
     padding-top: 10px;
     padding-bottom: 10px;
