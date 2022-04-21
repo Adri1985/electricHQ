@@ -41,9 +41,18 @@
         height: 70px;
         padding-top:30px;
     }
+  
 }
 h1{
     color: map-get($commonColors, titlesColor);
+}
+
+h3{
+    color: map-get($commonColors, titlesColor); 
+}
+
+h4{
+    color: map-get($commonColors, titlesColor); 
 }
 
 h6{
