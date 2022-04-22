@@ -30,6 +30,7 @@
     @include customDisplay(flex, column);
     align-items:flex-end;
     justify-content: center;
+    text-align: center;
 }
 
 .map{
@@ -42,4 +43,5 @@
     @include customDisplay(flex, column);
     align-items:flex-end;
     justify-content: center;
+    text-align: center;
 }
