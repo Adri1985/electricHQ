@@ -14,7 +14,10 @@
 .products{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 100%;
   
 }
 
@@ -24,8 +27,7 @@
     align-items: center;
     padding-bottom: 30px;
     img{
-        width: 300x;
-        height: 300px;
+       
         transition: all, 1s;
     }
 }

@@ -23,14 +23,14 @@
 
 <body class="body">
     <!-- es el cuerpo de nuestro sitio, todo tiene que estar comprendido en el body-->
-    <div class="container">
+    <div class="container-fluid m-0">
         <div class="row m-0">
-            <header class="header col-12">
+            <header class="header col-12 m-0">
 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="../index.html">
-                            <img src="../images/logo.png" alt="logo" width="30" height="24"
+                            <img src="../images/logo.png" alt="logoImage" width="30" height="24"
                                 class="d-inline-block align-text-top">
                             ELECTRIC-HQ
                         </a>
@@ -40,22 +40,21 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page"
-                                        href="pages/products.html">Products</a>
+                                    <a class="nav-link" aria-current="page" href="pages/products.html">Products</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/community.html">Comunity</a>
+                                    <a class="nav-link" href="pages/community.html">Comunity</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/prototypes.html">Prototypes</a>
+                                    <a class="nav-link" href="pages/prototypes.html">Prototypes</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/team.html">Team</a>
+                                    <a class="nav-link" href="pages/team.html">Team</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/contact.html">Contact</a>
+                                    <a class="nav-link" href="pages/contact.html">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -64,165 +63,180 @@
             </header>
 
         </div>
+    </div>
+    <div class="container">
+        <div class="main">
+            <div class="titulo col-12">
+                <h1>PRODUCT SEARCH</h1>
+                <h3>Gear up for your next adventure</h2>
+            </div>
+        
+        </div>
         <div class="row m-0">
-            <div class="form col-12">
+            <div class="col-lg-4 col-xs-0">
+            </div>
+            <div class="form col-lg-4 col-xs-12">
 
-                    <label for="type">Vehicle type </label>
-                    <select class="form-select form-select-lg" aria-label="Default select example">
-                        <option selected>Vehicle type</option>
-                        <option value="1">Electric Scooters</option>
-                        <option value="2">Electric Skateboards</option>
-                        <option value="3">Electric Surfboards</option>
-                        <option value="3">Electric Bikes</option>
-                        <option value="3">One Wheel (new!)</option>
-                    </select>
-                    <label for="type">Ship to </label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Ship to</option>
-                        <option value="1">Argentina</option>
-                        <option value="2">Brazil</option>
-                        <option value="3">Uruguay</option>
-                        <option value="3">Chile</option>
-                        <option value="3">Outside LATAM</option>
-                    </select>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                        <label class="form-check-label myCheck" for="inlineCheckbox1">New</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                        <label class="form-check-label myCheck" for="inlineCheckbox2">Pre-Owned</label>
-                    </div>
-                    <input type="text" id="" placeholder="min price">
-                    <input type="text" id="" placeholder="min price">
-                <input type="text" id="" placeholder="min range">
-                <input type="text" id="" placeholder="max range">
-                <button type="button" class="btn btn-warning">Search</button> </div>
-        <main class="row m-0"> 
+               
+                <select class="form-select form-select-lg w-100 mb-3" aria-label="Default select example">
+                    <option selected>Vehicle type</option>
+                    <option value="1">Electric Scooters</option>
+                    <option value="2">Electric Skateboards</option>
+                    <option value="3">Electric Surfboards</option>
+                    <option value="3">Electric Bikes</option>
+                    <option value="3">One Wheel (new!)</option>
+                </select>
+                
+                <select class="form-select form-select-lg w-100 mb-3" aria-label="Default select example" data-width="100%">
+                    <option selected>Ship to</option>
+                    <option value="1">Argentina</option>
+                    <option value="2">Brazil</option>
+                    <option value="3">Uruguay</option>
+                    <option value="3">Chile</option>
+                    <option value="3">Outside LATAM</option>
+                </select>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label myCheck" for="inlineCheckbox1">New</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input mb-3" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label myCheck" for="inlineCheckbox2">Pre-Owned</label>
+                </div>
+                <input type="text" class="w-100 mb-3" id="" placeholder="min price">
+                <input type="text" class="w-100 mb-3" id="" placeholder="min price">
+                <input type="text" class="w-100 mb-3" id="" placeholder="min range">
+                <input type="text" class="w-100 mb-3" id="" placeholder="max range">
+                <button type="button" class="btn btn-warning mb-3">Search</button>
+            </div>
+            <div class="col-lg-4 col-xs-0">
+            </div>
+        </div>
+        <main class="row m-0">
             <div class="products col-12">
                 <div class="product">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../images/product1.png" class="card-img-top" alt="skateboard long">
+                    <div class="card" style="width: 100%;">
+                        <img src="../images/product1.png" class="card-img-top w-100 h-100" alt="skateboard long">
                         <div class="card-body">
-                          <h5 class="card-title">Evolve Hadean Carbon 2</h5>
-                          <p class="card-text">Top features include:</p>
+                            <h5 class="card-title">Evolve Hadean Carbon 2</h5>
+                            <p class="card-text">Top features include:</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">AT and Street wheels</li>
-                          <li class="list-group-item">30mph top speed</li>
-                          <li class="list-group-item">35% hill climbing ability</li>
+                            <li class="list-group-item">AT and Street wheels</li>
+                            <li class="list-group-item">30mph top speed</li>
+                            <li class="list-group-item">35% hill climbing ability</li>
                         </ul>
                         <a href="#" class="btn btn-warning">BUY NOW</a>
-                        <a href="../pages/community.html"  class="btn btn-light">REQUEST REVIEW</a>
+                        <a href="../pages/community.html" class="btn btn-light">REQUEST REVIEW</a>
                     </div>
                 </div>
                 <div class="product">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../images/product2.png" class="card-img-top" alt="skateboard long">
+                    <div class="card" style="width: 100%;">
+                        <img src="../images/product2.png" class="card-img-top w-100 h-100" alt="skateboard long">
                         <div class="card-body">
-                          <h5 class="card-title">Meepo V4 Shuffle</h5>
-                          <p class="card-text">Top features include:</p>
+                            <h5 class="card-title">Meepo V4 Shuffle</h5>
+                            <p class="card-text">Top features include:</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Dual 620W motors</li>
-                          <li class="list-group-item">Weight 16 lbs</li>
-                          <li class="list-group-item">New M4S remote</li>
+                            <li class="list-group-item">Dual 620W motors</li>
+                            <li class="list-group-item">Weight 16 lbs</li>
+                            <li class="list-group-item">New M4S remote</li>
                         </ul>
                         <a href="#" class="btn btn-warning">BUY NOW</a>
-                        <a href="../pages/community.html"  class="btn btn-light">REQUEST REVIEW</a>
+                        <a href="../pages/community.html" class="btn btn-light">REQUEST REVIEW</a>
                     </div>
                 </div>
                 <div class="product">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../images/product3.png" class="card-img-top" alt="skateboard meepo">
+                    <div class="card" style="width: 100%;">
+                        <img src="../images/product3.png" class="card-img-top w-100 h-100" alt="skateboard meepo">
                         <div class="card-body">
-                          <h5 class="card-title">New Meepo Mini 2 Standard</h5>
-                          <p class="card-text">Top features include:</p>
+                            <h5 class="card-title">New Meepo Mini 2 Standard</h5>
+                            <p class="card-text">Top features include:</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">29 mph top speed</li>
-                          <li class="list-group-item">versatile deck</li>
-                          <li class="list-group-item">18 miles range</li>
+                            <li class="list-group-item">29 mph top speed</li>
+                            <li class="list-group-item">versatile deck</li>
+                            <li class="list-group-item">18 miles range</li>
                         </ul>
                         <a href="#" class="btn btn-warning">BUY NOW</a>
-                        <a href="../pages/community.html"  class="btn btn-light">REQUEST REVIEW</a>
+                        <a href="../pages/community.html" class="btn btn-light">REQUEST REVIEW</a>
                     </div>
                 </div>
                 <div class="product">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../images/product4.png" class="card-img-top" alt="bike fat">
+                    <div class="card" style="width: 100%;">
+                        <img src="../images/product4.png" class="card-img-top w-100 h-100" alt="bike fat">
                         <div class="card-body">
-                          <h5 class="card-title">Eunorau FAT-HS 1000</h5>
-                          <p class="card-text">Top features include:</p>
+                            <h5 class="card-title">Eunorau FAT-HS 1000</h5>
+                            <p class="card-text">Top features include:</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Shimano Deore 9-speed shifter</li>
-                          <li class="list-group-item">1000W Bafang motor</li>
-                          <li class="list-group-item">40-mile range</li>
+                            <li class="list-group-item">Shimano Deore 9-speed shifter</li>
+                            <li class="list-group-item">1000W Bafang motor</li>
+                            <li class="list-group-item">40-mile range</li>
                         </ul>
                         <a href="#" class="btn btn-warning">BUY NOW</a>
-                        <a href="../pages/community.html"  class="btn btn-light">REQUEST REVIEW</a>
+                        <a href="../pages/community.html" class="btn btn-light">REQUEST REVIEW</a>
                     </div>
                 </div>
                 <div class="product">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../images/product5.png" class="card-img-top" alt="bike jupiter">
+                    <div class="card" style="width: 100%;">
+                        <img src="../images/product5.png" class="card-img-top w-100 h-100" alt="bike jupiter">
                         <div class="card-body">
-                          <h5 class="card-title">Jupiter Defiant</h5>
-                          <p class="card-text">Top features include:</p>
+                            <h5 class="card-title">Jupiter Defiant</h5>
+                            <p class="card-text">Top features include:</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">300 lbs payload capacity</li>
-                          <li class="list-group-item">Front & rear disc brakes</li>
-                          <li class="list-group-item">750W brushless hub motor</li>
+                            <li class="list-group-item">300 lbs payload capacity</li>
+                            <li class="list-group-item">Front & rear disc brakes</li>
+                            <li class="list-group-item">750W brushless hub motor</li>
                         </ul>
                         <a href="#" class="btn btn-warning">BUY NOW</a>
-                        <a href="../pages/community.html"  class="btn btn-light">REQUEST REVIEW</a>
+                        <a href="../pages/community.html" class="btn btn-light">REQUEST REVIEW</a>
                     </div>
                 </div>
                 <div class="product">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../images/product6.png" class="card-img-top" alt="Mountain Bike">
+                    <div class="card" style="width: 100%;">
+                        <img src="../images/product6.png" class="card-img-top w-100 h-100" alt="Mountain Bike">
                         <div class="card-body">
-                          <h5 class="card-title">Rambo Bushwacker</h5>
-                          <p class="card-text">Top features include:</p>
+                            <h5 class="card-title">Rambo Bushwacker</h5>
+                            <p class="card-text">Top features include:</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Rambo Custom built chain rim</li>
-                          <li class="list-group-item">Digital on-board display</li>
-                          <li class="list-group-item">Tektro hydraulic piston brakes</li>
+                            <li class="list-group-item">Rambo Custom built chain rim</li>
+                            <li class="list-group-item">Digital on-board display</li>
+                            <li class="list-group-item">Tektro hydraulic piston brakes</li>
                         </ul>
                         <a href="#" class="btn btn-warning">BUY NOW</a>
-                        <a href="../pages/community.html"  class="btn btn-light">REQUEST REVIEW</a>
+                        <a href="../pages/community.html" class="btn btn-light">REQUEST REVIEW</a>
                     </div>
                 </div>
                 <div class="product">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../images/product7.png" class="card-img-top" alt="Yamaha">
+                    <div class="card" style="width: 100%;">
+                        <img src="../images/product7.png" class="card-img-top w-100 h-100" alt="Yamaha">
                         <div class="card-body">
-                          <h5 class="card-title">Yamaha RDS300</h5>
-                          <p class="card-text">Top features include:</p>
+                            <h5 class="card-title">Yamaha RDS300</h5>
+                            <p class="card-text">Top features include:</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item"> Run up to 1.5 hours</li>
-                          <li class="list-group-item">Rated to 100ft / 30m</li>
-                          <li class="list-group-item">Waterproof construction</li>
+                            <li class="list-group-item"> Run up to 1.5 hours</li>
+                            <li class="list-group-item">Rated to 100ft / 30m</li>
+                            <li class="list-group-item">Waterproof construction</li>
                         </ul>
                         <a href="#" class="btn btn-warning">BUY NOW</a>
-                        <a href="../pages/community.html"  class="btn btn-light">REQUEST REVIEW</a>
+                        <a href="../pages/community.html" class="btn btn-light">REQUEST REVIEW</a>
                     </div>
                 </div>
                 <div class="product">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../images/product8.png" class="card-img-top" alt="surfboard">
+                    <div class="card" style="width: 100%;">
+                        <img src="../images/product8.png" class="card-img-top w-100 h-100" alt="surfboard">
                         <div class="card-body">
-                          <h5 class="card-title">Radinn Carve Surfboard</h5>
-                          <p class="card-text">Top features include:</p>
+                            <h5 class="card-title">Radinn Carve Surfboard</h5>
+                            <p class="card-text">Top features include:</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Jetpack G3</li>
-                          <li class="list-group-item">Acceleration: 0-25 in 9.7s</li>
-                          <li class="list-group-item">Board Weight: 20 lbs</li>
+                            <li class="list-group-item">Jetpack G3</li>
+                            <li class="list-group-item">Acceleration: 0-25 in 9.7s</li>
+                            <li class="list-group-item">Board Weight: 20 lbs</li>
                         </ul>
                         <a href="#" class="btn btn-warning">BUY NOW</a>
                         <a href="../pages/community.html" class="btn btn-light">REQUEST REVIEW</a>
@@ -230,37 +244,47 @@
                 </div>
             </div>
         </main>
-        <div class="row m-0">           
+        <div class="main">
+            <div class="titulo col-12">
+                <h1>BEST SELLERS</h1>
+            </div>
+        
+        </div>
+        <div class="row m-0 pb-5">
             <div class="bestSellers col-lg-3 col-md-6 col-xs 12">
-                    <img src="../images/bestskate.png" alt="best Skates">
+                <a href="../pages/community.html"> <img src="../images/bestskate.png" alt="bestSkates"></a>
             </div>
             <div class="bestSellers col-lg-3 col-md-6 col-xs 12">
-                <img src="../images/bestbike.png" alt="best Bikes">
+                <a href="../pages/community.html"><img src="../images/bestbike.png" alt="bestBikes"></a>
             </div>
             <div class="bestSellers col-lg-3 col-md-6 col-xs 12">
-                <img src="../images/bestscooter.png" alt="best Scooters">
+                <a href="../pages/community.html"><img src="../images/bestscooter.png" alt="bestScooters"></a>
             </div>
             <div class="bestSellers col-lg-3 col-md-6 col-xs 12">
-                <img src="../images/bestdeliverybike.png" alt="best Delivery Bikes">
+                <a href="../pages/community.html"><img src="../images/bestdeliverybike.png" alt="bestDeliveryBikes"></a>
             </div>
         </div>
-        <div class="row m-0">
-            <footer class="footer col-12">
-                <label for="">COPYRIGHT</label>
-                <label for="">INVEST</label>
-                <label for="">TERMS AND CONDITIONS</label>
-                <label for="">PRIVACY</label>
-            </footer>
-        </div>
-        <div class="row m-0">
-            <footer class="footer col-12">
-                <div class="footer__platforms">
-                    <a href="https://www.instagram.com" target="_blank"><img src="../images/instagram.png" alt="instagram" width="50" height="50"></a>
-                    <a href="https://www.facebook.com" target="_blank"><img src="../images/facebook.png" alt="instagram" width="50" height="50"></a>
-                    <a href="https://www.youtube.com" target="_blank"><img src="../images/youtube.png" alt="instagram" width="50" height="50"></a>
-                </div>
-            </footer>
-        </div>
+
+    </div>
+    <div class="row m-0">
+        <footer class="footer col-12">
+            <label for="">COPYRIGHT</label>
+            <label for="">INVEST</label>
+            <label for="">TERMS AND CONDITIONS</label>
+            <label for="">PRIVACY</label>
+        </footer>
+    </div>
+    <div class="row m-0">
+        <footer class="footer col-12">
+            <div class="footer__platforms">
+                <a href="https://www.instagram.com" target="_blank"><img src="../images/instagram.png" alt="instagram"
+                        width="50" height="50"></a>
+                <a href="https://www.facebook.com" target="_blank"><img src="../images/facebook.png" alt="instagram"
+                        width="50" height="50"></a>
+                <a href="https://www.youtube.com" target="_blank"><img src="../images/youtube.png" alt="instagram"
+                        width="50" height="50"></a>
+            </div>
+        </footer>
     </div>
 </body>
 

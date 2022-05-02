@@ -23,15 +23,15 @@
 </head>
 
 <body class="body">
-    <div class="container">
+    <div class="container-fluid m-0">
         <div class="row m-0">
-            <header class="header col-12">
+            <header class="header col-12 m-0">
 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="../index.html">
-                            <img src="../images/logo.png" alt="logo" width="30" height="24"
-                                class="d-inline-block align-text-top">
+                        <a class="navbar-brand" href="#">
+                            <img src="../images/logo.png" alt="logoImage" width="30" height="24"
+                                class="d-inline-block align-text-top rounded-circle">
                             ELECTRIC-HQ
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -40,28 +40,28 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/products.html">Products</a>
+                                    <a class="nav-link" aria-current="page" href="pages/products.html">Products</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page"
-                                        href="../pages/community.html">Community</a>
+                                    <a class="nav-link" href="pages/community.html">Comunity</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/prototypes.html">Prototypes</a>
+                                    <a class="nav-link" href="pages/prototypes.html">Prototypes</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/team.html">Team</a>
+                                    <a class="nav-link" href="pages/team.html">Team</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/contact.html">Contact</a>
+                                    <a class="nav-link" href="pages/contact.html">Contact</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
             </header>
+
         </div>
 
         <div class="row m-0">
@@ -73,13 +73,15 @@
                     <h3>Check out our customers review and make your own! </h3>
 
                 </div>
-                <div>
-                </div>
-
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
                 <div class="main row m-0">
                     <div id="carouselExampleInterval" class="carousel slide col-lg-6 col-md-12 col-xs-12 py-5"
                         data-bs-ride="carousel">
-                        <h4>Our latest reviews</h4>
+                        <h4>Our latest reviews:</h4>
                         <div class="carousel-inner">
                             <div class="carousel-item active" data-bs-interval="10000">
                                 <div class="card" style="width: 100%">
@@ -112,7 +114,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="card" style="width: 100%">
-                                    <img class="review" src="../images/review2.jpeg" class="card-img-top"
+                                    <img class="review" src="../images/review2.png" class="card-img-top"
                                         alt="review bike">
                                     <div class="card-body">
                                         <h5 class="card-title">Carolina V</h5>
@@ -120,11 +122,7 @@
                                         <p class="card-text">
                                             Very good strong bike.
                                             750w very powerful.
-                                            Nice smooth transaction.
-                                            Good communication.
-                                            The only thing is the display is smaller than shown on a picture.
-                                            Also there's no bell.
-                                            But they sent it later..</p>
+                                            Nice smooth transaction climbing hills.</p>
                                         <h5 class="card-title">Product: Rattan LM 750W Electric Bike</h6>
                                             <a href="#" class="btn btn-warning">SHOP NOW!</a>
                                     </div>
@@ -162,7 +160,7 @@
                             </select>
                             <label for="customRange1" class="form-label">Rating (1 to 10)</label>
                             <input type="range" class="form-range" id="customRange1">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="22"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="auto"></textarea>
                             <a href="#" class="btn btn-warning">Submit review</a>
                         </div>
                     </div>
@@ -220,7 +218,7 @@
                             allowfullscreen></iframe>
                     </div>
                 </div>
-            </div>
+           
         </div>
 
 

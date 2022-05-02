@@ -10,7 +10,8 @@
     justify-content: center; 
     text-align: center;
     padding-top: 30px;
-    padding-bottom: 30px; 
+    padding-bottom: 30px;
+    
     h1{
         font-family: Arial, Helvetica, sans-serif;
         font-size: 400%;
@@ -30,6 +31,12 @@
     }
 }
 
+
+
+.roundedImage{
+    border-radius: 3%;
+}
+
 .titulo{
     width: 100%;
     @include customDisplay(flex, column);
@@ -43,6 +50,8 @@
     }
   
 }
+
+
 h1{
     color: map-get($commonColors, titlesColor);
 }
@@ -62,42 +71,56 @@ h6{
 .imagenes{
     display:flex;
     width: 100%;
-    justify-content: space-around;
+    height: 100% ;
+    align-items: center;
     padding-bottom: 20px;
+   
 }
 .imagen--grande{
-    width: 100%;
-    justify-content: space-around;
+ 
+    justify-content: center;
+    align-items: center;
     a{
-        width: 100%;
-        height: 100%;
         img{
             width: 100%;
             height: 100%;
+            border-radius: 3%;
         }
     }
     
 }
+
+
 
 
 /*extendiendo de imagen--grande los atributos width y justify content, el resto se sobreescribe*/
 .imagenes--pequeñas{
     @extend .imagen--grande;
-    height: 100%; 
+    
     @include customDisplay(flex, column);
-    justify-items: center;
-    a{
-        height: 100%;
-        img{
-            width: 100%;
-            height: 100%;        
-        }
-    }
+    align-items:flex-end;
+    align-content: space-between;
+    padding-left:20%;
+   
+   
     iframe{
         width: 100%;
         height: 100%;
     }
     
+}
+
+
+
+.imagen--pequeña__abajo{
+    width: 100%;
+    height: 50%;
+    padding-top:11%;
+}
+
+.imagen--pequeña a img{
+    width:100%;
+    height: 100%;
 }
 
 .bestSellers{
@@ -109,13 +132,24 @@ h6{
     
 
 }
+.bestSellers{
+    a{
+        img{
+            width:100%;
+            height: 100%;
+            border-radius: 5%;
+        }
+    }
+}
 
 .bestImages{
     width: 100%;
-    img{
+    a{
         width: 100%;
+        img{
+            width: 100%;
+        }
     }
-    
   
 }
 
