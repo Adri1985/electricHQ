@@ -1,32 +1,43 @@
-.header{
+/*.header{
     display: flex;
     justify-content: center;
     text-align: center;
     justify-content:center;
     flex-wrap: wrap;
     width: 100%;
-    ul{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        list-style-type: none;
-        li{
-            flex-direction: row;
-            a{
-                text-decoration: solid;
-                color: black;
-                font-family: Arial, Helvetica, sans-serif;
-                font-weight: bold;
-                transition: all 1s;
-                &:hover{
-                    transform:scale(1.2,1.2);
+    nav{
+        div{
+            div{
+                ul{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                    list-style-type: none;
+                  
+                    li{
+                        flex-direction: row;
+                      
+                        a{
+                            text-decoration: solid;
+                            color: black;
+                            font-family: Arial, Helvetica, sans-serif;
+                            font-weight: bold;
+                            transition: all 1s;
+                            &:hover{
+                                transform:scale(1.2,1.2);
+                            }
+                        }
+                        
+                    }
+                    
+                  
                 }
+
             }
-            
         }
-        
-      
     }
+    
+ 
    
-}
+}*/
 

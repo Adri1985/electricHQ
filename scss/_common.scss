@@ -50,7 +50,14 @@
     }
   
 }
-
+.creators{
+    a{
+        img{
+            width:100%;
+            height:100%;
+        }
+    }
+}
 
 h1{
     color: map-get($commonColors, titlesColor);
@@ -61,6 +68,10 @@ h3{
 }
 
 h4{
+    color: map-get($commonColors, titlesColor); 
+}
+
+h5{
     color: map-get($commonColors, titlesColor); 
 }
 
@@ -76,6 +87,11 @@ h6{
     padding-bottom: 20px;
    
 }
+
+.resaltar{
+    font-size: 20px;
+    color: white;
+}
 .imagen--grande{
  
     justify-content: center;
@@ -90,6 +106,10 @@ h6{
     
 }
 
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+ }
 
 
 
@@ -100,7 +120,7 @@ h6{
     @include customDisplay(flex, column);
     align-items:flex-end;
     align-content: space-between;
-    padding-left:20%;
+    padding-left:10%;
    
    
     iframe{
@@ -115,7 +135,7 @@ h6{
 .imagen--pequeña__abajo{
     width: 100%;
     height: 50%;
-    padding-top:11%;
+    padding-top:6%;
 }
 
 .imagen--pequeña a img{
