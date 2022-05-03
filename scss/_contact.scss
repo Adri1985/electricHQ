@@ -1,47 +1,49 @@
-.contact{
-   
+.contact {
+
     display: grid;
     grid-template-columns: 1fr, 1fr;
     grid-template-rows: 1fr, 1fr;
-    grid-template-areas: 
-    "contactForm contactInfo"
-    "map location";
+    grid-template-areas:
+        "contactForm contactInfo"
+        "map location";
     grid-column-gap: 15px;
     grid-row-gap: 15px;
 }
 
-.contactForm{
+.contactForm {
     grid-area: contactForm;
     @include customDisplay(flex, column);
-    ul{
+
+    ul {
         @include customDisplay(flex, column);
-        li{
-            textarea{
-                width:500px;
+
+        li {
+            textarea {
+                width: 500px;
             }
         }
     }
-    
+
 }
 
 
-.contactInfo{
+.contactInfo {
     grid-area: contactInfo;
     @include customDisplay(flex, column);
-    align-items:flex-end;
+    align-items: flex-end;
     justify-content: center;
     text-align: center;
 }
 
-.map{
-    grid-area:map;
+.map {
+    grid-area: map;
 }
 
 
-.location{
-    grid-area:location;
+.location {
+    grid-area: location;
     @include customDisplay(flex, column);
-    align-items:flex-end;
+    align-items: flex-end;
     justify-content: center;
     text-align: center;
 }

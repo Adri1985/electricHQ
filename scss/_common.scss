@@ -1,30 +1,32 @@
-.body{
+.body {
 
-    background-color: map-get($commonColors , mainColor);
+    background-color: map-get($commonColors, mainColor);
 
 }
 
-.main{
+.main {
     @include customDisplay(flex, row);
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center;
     text-align: center;
     padding-top: 30px;
     padding-bottom: 30px;
-    
-    h1{
+
+    h1 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 400%;
         font-weight: bold;
         color: white;
     }
-    h2{
+
+    h2 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 200%;
         font-weight: bold;
-        color: white; 
+        color: white;
     }
-    p{
+
+    p {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 100%;
         color: map-get($commonColors, titlesColor);
@@ -33,148 +35,153 @@
 
 
 
-.roundedImage{
+.roundedImage {
     border-radius: 3%;
 }
 
-.titulo{
+.titulo {
     width: 100%;
     @include customDisplay(flex, column);
     align-items: center;
     justify-content: center;
     text-align: center;
-    img{
+
+    img {
         width: 70px;
         height: 70px;
-        padding-top:30px;
+        padding-top: 30px;
     }
-  
+
 }
-.creators{
-    a{
-        img{
-            width:100%;
-            height:100%;
+
+.creators {
+    a {
+        img {
+            width: 100%;
+            height: 100%;
         }
     }
 }
 
-h1{
+h1 {
     color: map-get($commonColors, titlesColor);
 }
 
-h3{
-    color: map-get($commonColors, titlesColor); 
+h3 {
+    color: map-get($commonColors, titlesColor);
 }
 
-h4{
-    color: map-get($commonColors, titlesColor); 
+h4 {
+    color: map-get($commonColors, titlesColor);
 }
 
-h5{
-    color: map-get($commonColors, titlesColor); 
+h5 {
+    color: map-get($commonColors, titlesColor);
 }
 
-h6{
-    color:  map-get($commonColors, titlesColor);
+h6 {
+    color: map-get($commonColors, titlesColor);
 }
 
-.imagenes{
-    display:flex;
+.imagenes {
+    display: flex;
     width: 100%;
-    height: 100% ;
+    height: 100%;
     align-items: center;
     padding-bottom: 20px;
-   
+
 }
 
-.resaltar{
+.resaltar {
     font-size: 20px;
     color: white;
 }
-.imagen--grande{
- 
+
+.imagen--grande {
+
     justify-content: center;
     align-items: center;
-    a{
-        img{
+
+    a {
+        img {
             width: 100%;
             height: 100%;
             border-radius: 3%;
         }
     }
-    
+
 }
 
 .nopadding {
     padding: 0 !important;
     margin: 0 !important;
- }
+}
 
 
 
 /*extendiendo de imagen--grande los atributos width y justify content, el resto se sobreescribe*/
-.imagenes--pequeñas{
+.imagenes--pequeñas {
     @extend .imagen--grande;
-    
+
     @include customDisplay(flex, column);
-    align-items:flex-end;
+    align-items: flex-end;
     align-content: space-between;
-    padding-left:10%;
-   
-   
-    iframe{
+    padding-left: 10%;
+
+
+    iframe {
         width: 100%;
         height: 100%;
     }
-    
+
 }
 
 
 
-.imagen--pequeña__abajo{
+.imagen--pequeña__abajo {
     width: 100%;
     height: 50%;
-    padding-top:6%;
+    padding-top: 6%;
 }
 
-.imagen--pequeña a img{
-    width:100%;
+.imagen--pequeña a img {
+    width: 100%;
     height: 100%;
 }
 
-.bestSellers{
+.bestSellers {
     @include customDisplay(flex, column);
     justify-content: center;
     align-items: center;
     padding-top: 10px;
     padding-bottom: 10px;
-    
+
 
 }
-.bestSellers{
-    a{
-        img{
-            width:100%;
+
+.bestSellers {
+    a {
+        img {
+            width: 100%;
             height: 100%;
             border-radius: 5%;
         }
     }
 }
 
-.bestImages{
+.bestImages {
     width: 100%;
-    a{
+
+    a {
         width: 100%;
-        img{
+
+        img {
             width: 100%;
         }
     }
-  
+
 }
 
-.rowMarginCero{
-    margin:0;
+.rowMarginCero {
+    margin: 0;
 }
-
-
