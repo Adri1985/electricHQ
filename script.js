@@ -58,7 +58,7 @@ productos.push(new Producto ("Yamaha", "RDS300", "WaterSport", 20, 1000));
 
 function validarComoNosConocio(){
     let conocio= prompt("Como nos conociste? Selecciona las siguientes opciones: Referido / Instagram / Facebook / Youtube / Otro.");
-    while(conocio != "Referido" && conocio != "Instagram" && conocio != "Facebook" && conocio != "Youtube" && conocio !="Otro"){
+    while(conocio.toLocaleLowerCase() != "referido" && conocio.toLocaleLowerCase() != "instagram" && conocio.toLocaleLowerCase() != "facebook" && conocio.toLocaleLowerCase() != "youtube" && conocio.toLocaleLowerCase() !="otro"){
          conocio= prompt("Por favor valida las opciones. Como nos conociste?: Referido / Instagram / Facebook / Youtube / Otro.");
     }
     return conocio;
@@ -66,7 +66,7 @@ function validarComoNosConocio(){
 
 function validarVehiculo(){
     let vehiculo = prompt("Tenes alguno de estos vehiculos electricos?. Cual?: Scooter/Skate/Moto/Otro/Ninguno. " );
-    while(vehiculo != "Scooter" && vehiculo != "Skate" && vehiculo != "Moto" && vehiculo != "Ninguno" && vehiculo !="Otro"){
+    while(vehiculo.toLocaleLowerCase() != "scooter" && vehiculo.toLocaleLowerCase() != "skate" && vehiculo.toLocaleLowerCase() != "moto" && vehiculo.toLocaleLowerCase() != "Ninguno" && vehiculo.toLocaleLowerCase() !="Otro"){
         vehiculo= prompt("Por favor valida las opciones. enes alguno de estos vehiculos electricos?. Cual?: Scooter/Skate/Moto/Otro/Ninguno.");
    }
    return vehiculo;
