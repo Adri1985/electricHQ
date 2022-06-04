@@ -243,7 +243,8 @@ function listProducts(lista){
         listGroup.innerHTML = `<li class="list-group-item">${producto.topFeature1}</li>
         <li class="list-group-item">${producto.topFeature2}</li>
         <li class="list-group-item">${producto.topFeature3}</li>
-        <li class="list-group-item">Price: $${producto.precio}</li>`
+        <li class="list-group-item">Price: $${producto.precio}</li>
+        <li class="list-group-item">Max Range: ${producto.rango} Miles</li>`
 
         let buttonBuy = document.createElement("a");
         buttonBuy.className="btn btn-warning";
