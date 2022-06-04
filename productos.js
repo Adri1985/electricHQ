@@ -1,5 +1,3 @@
-
-
 class Producto{
     constructor(marca, modelo, tipo, rango, precio, topFeature1, topFeature2, topFeature3, imageName){
         this.marca = marca;
@@ -139,16 +137,23 @@ boton.addEventListener("click", buscar);
 function buscar(){
     let porPrecio = 0;
     let porRango = 0;
+    let minPrecioFloat = parseFloat(minPrecio.value);
+    let maxPrecioFloat = parseFloat(maxPrecio.value);
+    let minRangoFloat = parseFloat(minRange.value);
+    let maxRangoFloat = parseFloat(maxRange.value);
+
+    console.log("min precio antes "+minPrecio.value+" max precio antes "+maxPrecioFloat);
+    
    
-    if(minPrecio.value != "min price" && maxPrecio.value!="max price")
+    if(minPrecioFloat != "min price" && maxPrecioFloat!="max price")
     {
-        if(minPrecio.value < maxPrecio.value ){
+        if(minPrecioFloat < maxPrecioFloat ){
             porPrecio = 1;
         }
     }
-    if(minRange.value !="min range" && maxRange.value !="max range")
+    if(minRangoFloat !="min range" && maxRangoFloat !="max range")
     {
-        if(minRange.value < maxRange.value){
+        if(minRangoFloat < maxRangoFloat){
             porRango = 1;
         }
     }
@@ -156,42 +161,42 @@ function buscar(){
     let seleccion  = document.getElementById("selectTipo");
     let selected =seleccion.options[seleccion.selectedIndex].text;
     console.log(selected);
-    console.log("por precio "+porPrecio+" por Rango "+porRango+" MinPrecio"+ minPrecio.value+ " maxPrecio "+maxPrecio.value+" minRango "+minRange.value+" maxRango "+maxRange.value);
+    console.log("por precio "+porPrecio+" por Rango "+porRango+" MinPrecio"+ minPrecioFloat+ " maxPrecio "+maxPrecioFloat+" minRango "+minRangoFloat+" maxRango "+maxRangoFloat);
  
     if(porPrecio == 1 && porRango == 0 && (selected.toLowerCase()=="vehicle type"||selected.toLowerCase()=='all types'))// busqueda por precio
     {
-         const resultado = productos.filter((el) => el.precio >= minPrecio.value && el.precio<= maxPrecio.value);
+         const resultado = productos.filter((el) => el.precio >= minPrecioFloat && el.precio<= maxPrecioFloat);
          console.log("por precio");
          listProducts(resultado);
     }
     if(porPrecio == 1 && porRango == 1 && (selected.toLowerCase()=="vehicle type"||selected.toLowerCase()=='all types')) // busqueda por precio y rango
     {
-        const resultado = productos.filter((el) => el.precio >= minPrecio.value && el.precio<= maxPrecio.value && el.rango >= minRange.value && el.rango <= maxRange.value);
+        const resultado = productos.filter((el) => el.precio >= minPrecioFloat && el.precio<= maxPrecioFloat && el.rango >= minRangoFloat && el.rango <= maxRangoFloat);
          console.log("por precio y rango"); 
          listProducts(resultado);
     }
     if(porPrecio == 0 && porRango == 1 && (selected.toLowerCase()=="vehicle type"||selected.toLowerCase()=='all types')) // busqueda por rango
     {
-        const resultado = productos.filter((el) => el.rango >= minRange.value && el.rango <= maxRange.value); 
+        const resultado = productos.filter((el) => el.rango >= minRangoFloat && el.rango <= maxRangoFloat); 
          console.log("por rango");
          listProducts(resultado);
     }
 
     if(porPrecio == 1 && porRango == 0 && selected.toLowerCase()!="vehicle type" && selected.toLowerCase()!='all types')// busqueda por precio y tipo
     {
-        const resultado = productos.filter((el) => el.precio >= minPrecio.value && el.precio<= maxPrecio.value && el.tipo.toLowerCase() == selected.toLowerCase());
+        const resultado = productos.filter((el) => el.precio >= minPrecioFloat && el.precio<= maxPrecioFloat && el.tipo.toLowerCase() == selected.toLowerCase());
          console.log("por precio y tipo");
          listProducts(resultado); 
     }
     if(porPrecio == 0 && porRango == 1 && selected.toLowerCase()!="vehicle type" && selected.toLowerCase()!='all types') // busqueda por rango y tipo
     {
-        const resultado = productos.filter((el) => el.rango >= minRange.value && el.rango <= maxRange.value && el.tipo.toLowerCase()  == selected.toLowerCase()); 
+        const resultado = productos.filter((el) => el.rango >= minRangoFloat && el.rango <= maxRangoFloat && el.tipo.toLowerCase()  == selected.toLowerCase()); 
          console.log("rango y tipo");
          listProducts(resultado);
     }
     if(porPrecio == 1 && porRango == 1 && selected.toLowerCase()!="vehicle type" && selected.toLowerCase()!='all types') // busqueda por precio rango y tipo
     {
-        const resultado = productos.filter((el) => el.precio >= minPrecio.value && el.precio<= maxPrecio.value && el.rango >= minRange.value && el.rango <= maxRange.value && el.tipo.toLowerCase()  == selected.toLowerCase()); 
+        const resultado = productos.filter((el) => el.precio >= minPrecioFloat && el.precio<= maxPrecioFloat && el.rango >= minRangoFloat && el.rango <= maxRangoFloat && el.tipo.toLowerCase()  == selected.toLowerCase()); 
          console.log("por precio, rango y tipo");
          listProducts(resultado);
     }
