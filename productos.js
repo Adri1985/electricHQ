@@ -191,7 +191,7 @@ function buscar(){
     }
     if(porPrecio == 1 && porRango == 1 && selected.toLowerCase()!="vehicle type" && selected.toLowerCase()!='all types') // busqueda por precio rango y tipo
     {
-        const resultado = productos.filter((el) => el.rango >= el.precio >= minPrecio.value && el.precio<= maxPrecio.value && minRange.value && el.rango <= maxRange.value && el.tipo.toLowerCase()  == selected.toLowerCase()); 
+        const resultado = productos.filter((el) => el.precio >= minPrecio.value && el.precio<= maxPrecio.value && minRange.value >= el.rango && el.rango <= maxRange.value && el.tipo.toLowerCase()  == selected.toLowerCase()); 
          console.log("por precio, rango y tipo");
          listProducts(resultado);
     }
