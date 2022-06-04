@@ -150,11 +150,17 @@ function buscar(){
         if(minPrecioFloat < maxPrecioFloat ){
             porPrecio = 1;
         }
+        else{
+            alert("el precio minimo tiene que ser mayor al precio maximo");
+        }
     }
     if(minRangoFloat !="min range" && maxRangoFloat !="max range")
     {
         if(minRangoFloat < maxRangoFloat){
             porRango = 1;
+        }
+        else{
+            alert("el rango minimo tiene que ser mayor al rango maximo");
         }
     }
     
