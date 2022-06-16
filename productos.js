@@ -1,34 +1,63 @@
+let likedIds=[];
+
 class Producto{
-    constructor(marca, modelo, tipo, rango, precio, topFeature1, topFeature2, topFeature3, imageName){
+    constructor(id, marca, modelo, tipo, rango, precio, topFeature1, topFeature2, topFeature3, imageName, liked){
+        this.id = id;
         this.marca = marca;
         this.modelo = modelo,
-        this.tipo = tipo,
+        this.tipo = tipo;
         this.rango = rango;
         this.precio = precio;
         this.topFeature1 = topFeature1;
         this.topFeature2 = topFeature2;
         this.topFeature3 = topFeature3;
         this.imageName = imageName;
+        this.liked =liked;
     }
 }
 
 const productos=[];
-productos.push(new Producto ("Evolve", "Hadean Carbon 2", "Skateboard", 30, 400,"AT and Street wheels","30mph top speed", "35% hill climbing ability", "product1.png" ));
+productos.push(new Producto ("1","Evolve", "Hadean Carbon 2", "Skateboard", 30, 400,"AT and Street wheels","30mph top speed", "35% hill climbing ability", "product1.png", "N"));
 
-productos.push(new Producto ("Meepo", "V4 Shuffle", "Skateboard", 25, 100,"Dual 620W motors","Weight 16 lbs", "New M4S remote", "product2.png"));
+productos.push(new Producto ("2","Meepo", "V4 Shuffle", "Skateboard", 25, 100,"Dual 620W motors","Weight 16 lbs", "New M4S remote", "product2.png", "N"));
 
-productos.push(new Producto ("Meepo", "Mini 2 Standard", "Skateboard", 30, 300,"29 mph top speed","versatile deck", "18 miles range", "product3.png"));
+productos.push(new Producto ("3","Meepo", "Mini 2 Standard", "Skateboard", 30, 300,"29 mph top speed","versatile deck", "18 miles range", "product3.png","N"));
 
-productos.push(new Producto ("Eunorau", "FAT-HS 1000", "Bike", 25, 400,"Shimano Deore 9-speed shifter","1000W Bafang motor", "40-mile range", "product4.png"));
+productos.push(new Producto ("4","Eunorau", "FAT-HS 1000", "Bike", 25, 400,"Shimano Deore 9-speed shifter","1000W Bafang motor", "40-mile range", "product4.png","N"));
 
-productos.push(new Producto ("Jupiter", "Defiant", "Bike", 20, 1000,
-"300 lbs payload capacity","ront & rear disc brakes", "750W brushless hub motor", "product5.png"));
+productos.push(new Producto ("5","Jupiter", "Defiant", "Bike", 20, 1000,
+"300 lbs payload capacity","ront & rear disc brakes", "750W brushless hub motor", "product5.png","N"));
 
-productos.push(new Producto ("Rambo", "Bushwacker", "Bike", 30, 400,"Rambo Custom built chain rim","Digital on-board display", "Tektro hydraulic piston brakes", "product6.png" ));
+productos.push(new Producto ("6","Rambo", "Bushwacker", "Bike", 30, 400,"Rambo Custom built chain rim","Digital on-board display", "Tektro hydraulic piston brakes", "product6.png","N" ));
 
-productos.push(new Producto ("Yamaha", "RDS300", "SeaScooter", 25, 100,"Run up to 1.5 hours","Rated to 100ft / 30m", "Waterproof construction", "product7.png"));
+productos.push(new Producto ("7", "Yamaha", "RDS300", "SeaScooter", 25, 100,"Run up to 1.5 hours","Rated to 100ft / 30m", "Waterproof construction", "product7.png","N"));
 
-productos.push(new Producto ("Eunorau", "Carve Surfboard", "Electric Surfboard", 25, 400,"Jetpack G3","Acceleration: 0-25 in 9.7s", "Board Weight: 20 lbs", "product8.png"));
+productos.push(new Producto ("8", "Eunorau", "Carve Surfboard", "Electric Surfboard", 25, 400,"Jetpack G3","Acceleration: 0-25 in 9.7s", "Board Weight: 20 lbs", "product8.png","N"));
+
+
+//ACA hacemos la carga inicial de likes si hay algo en el local storage
+
+setFromStorage();
+
+function setFromStorage(){
+    let likedArrayFromStorage = localStorage.getItem("liked");
+    if (likedArrayFromStorage != null)
+    {
+        likedIds = JSON.parse(likedArrayFromStorage);
+
+        for (const producto of productos){
+            for(i=0; i<likedIds.length;i++)
+            {
+                if(producto.id == likedIds[i]){
+                    producto.liked ="Y";
+                }
+            }
+            
+        }
+
+    }
+}
+
 
 
 listProducts(productos);
@@ -229,12 +258,33 @@ function listProducts(lista){
     let container = document.getElementById("products");
     container.innerHTML=``;
     let product;
+    
     for (const producto of lista){
+
+        console.log("id que llega "+producto.id+" liked o no "+producto.liked);
         product = document.createElement("div");
         product.className = "product";
         let card = document.createElement("div");
         card.className = "card";
         card.style="width: 100%";
+
+        let likeCont = document.createElement("div");
+        likeCont.className="likeDiv";
+
+        
+        let liked = document.createElement("img");
+        if(producto.liked =="Y")
+        {
+            liked.src= "../images/liked.png";
+        }
+        else{
+            liked.src= "../images/unliked.png";
+        }
+        liked.id="like"+producto.id;
+        console.log("en la creacion "+liked.id);
+        liked.className="bi bi-card-image"
+        likeCont.appendChild(liked);
+        
         let image= document.createElement("img");
         image.src="../images/"+producto.imageName;
         image.className = "card-img-top w-100 h-100";
@@ -257,15 +307,66 @@ function listProducts(lista){
         let buttonReview = document.createElement("a");
         buttonReview.className = "btn btn-light";
         buttonReview.textContent = "REQUEST REVIEW";
+        let buttonLike = document.createElement("button");
+        buttonLike.className="btn btn-default swap";
+        buttonLike.id="like";
+        let likeSpan = document.createElement("span");
+        likeSpan.className= "glyphicon glyphicon-heart-empty";
+        card.appendChild(likeCont);
         card.appendChild(image);
         card.appendChild(cardBody);
         card.appendChild(listGroup);
         card.appendChild(buttonBuy);
         card.appendChild(buttonReview);
+        card.appendChild(buttonLike);
         product.appendChild(card);
         container.appendChild(product);
     }
+
+    console.log("likeIds en la carga"+ likedIds);
   
+    for(const producto of lista)
+    {
+        console.log("entra al final "+producto.id);
+        let botLike =document.getElementById("like"+producto.id);
+        console.log("buscando "+"like"+producto.id);
+        botLike.addEventListener('click', ()=>{
+            if(producto.liked == "Y"){
+                console.log("disliked");
+                producto.liked = "N";
+                botLike.src="../images/unliked.png";
+                likedIds.pop(producto.id);
+                console.log(likedIds);
+                console.log(JSON.stringify(likedIds));
+                localStorage.setItem("liked", JSON.stringify(likedIds));
+            }
+            else{
+                console.log("liked");
+                producto.liked ="Y";
+                botLike.src="../images/liked.png";
+                likedIds.push(producto.id);
+                console.log(likedIds);
+                console.log(JSON.stringify(likedIds));
+                localStorage.setItem("liked", JSON.stringify(likedIds));
+            }
+        });
+
+    }
     
 
 }
+
+//Storage
+
+
+let likedProducts = localStorage.getItem("liked");
+if(likedProducts != null){
+    let likedProductsJSON = JSON.parse(likedProducts);
+    //funcion para setear el like de cada producto por ID
+
+}
+
+
+
+    
+

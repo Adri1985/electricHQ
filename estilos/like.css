@@ -1,0 +1,25 @@
+/*only for centering on the page*/
+.btn {
+    margin: 0 auto;
+    display: block;
+  }
+  /*removes ugly bootstrap border button*/
+  *.btn:active,
+  .btn:focus,
+  .btn:active:focus,
+  .btn:focus {
+    outline: none !important;
+  }
+  
+  button > span {
+    color: red;
+    font-size:20px;
+  }
+  
+  .btn:active {
+    box-shadow: none;
+  }
+  
+  .btn:active, .btn:hover, .btn:focus {
+    background-color:white;
+  }
