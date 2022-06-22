@@ -44,6 +44,8 @@ function setFromStorage(){
     if (likedArrayFromStorage != null)
     {
         likedIds = JSON.parse(likedArrayFromStorage);
+        console.log("likeIds");
+        
 
         for (const producto of productos){
             for(i=0; i<likedIds.length;i++)
@@ -99,11 +101,17 @@ function createSelectType(){
     select.id = "selectTipo";
     select.innerHTML = `<option selected>Vehicle type</option>`;
     select.innerHTML = select.innerHTML+`<option value=0 >All Types</option>`;
+
     let iteracion = 0;
     for(const tipo of tipos){
         iteracion++;
         select.innerHTML = select.innerHTML+`<option value="${iteracion}">${tipo.tipo}</option>`
+        console.log("iteracion "+iteracion);
     }
+    iteracion++;
+    select.innerHTML = select.innerHTML+`<option value="${iteracion}">My Favorites</option>`;
+    
+    console.log("iteracion fuera "+iteracion);
 
     types.prepend(select);
     
@@ -114,6 +122,12 @@ let minPrecio = document.getElementById("minPrecio");
 let maxPrecio = document.getElementById("maxPrecio");
 let minRange = document.getElementById("minRange");
 let maxRange = document.getElementById("maxRange");
+let countries = document.getElementById("countries");
+let newCheck = document.getElementById("new");
+let preOwnedCheck = document.getElementById("preowned");
+countries.disabled=true;
+preOwnedCheck.disabled=true;
+newCheck.disabled=true;
 
 minPrecio.addEventListener('input', () => {
     if(isNaN(minPrecio.value)){
@@ -160,6 +174,33 @@ maxRange.addEventListener('input', () => {
     }   
 });
 
+/*let temperatura = 31;
+temperatura>30? console.log("hace calor"): console.log("no hace calor"); porque aca no funciona?*/ 
+
+let seleccion  = document.getElementById("selectTipo");
+
+    seleccion.addEventListener('change', function() {
+        let selectedFav =seleccion.options[seleccion.selectedIndex].text;
+        console.log('You selected: ', selectedFav);
+        if(selectedFav.toLowerCase()=="my favorites"){
+            console.log("selecciono my favorites");
+            minPrecio.disabled=true;
+            maxPrecio.disabled=true;
+            minRange.disabled=true;
+            maxRange.disabled=true;
+        }
+        else
+        {   minPrecio.disabled=false;
+            maxPrecio.disabled=false;
+            minRange.disabled=false;
+            maxRange.disabled=false;
+        }
+    });
+    let selected =seleccion.options[seleccion.selectedIndex].text;
+    
+
+
+
 let boton = document.getElementById("botonBusqueda");
 boton.addEventListener("click", buscar);
 
@@ -170,26 +211,32 @@ function buscar(){
     let maxPrecioFloat = parseFloat(maxPrecio.value);
     let minRangoFloat = parseFloat(minRange.value);
     let maxRangoFloat = parseFloat(maxRange.value);
+    
 
     console.log("min precio antes "+minPrecio.value+" max precio antes "+maxPrecioFloat);
     
-   
+   //Operadores especiales, utilizacion de &&
     if(minPrecioFloat != "min price" && maxPrecioFloat!="max price")
     {
-        if(minPrecioFloat < maxPrecioFloat ){
-            porPrecio = 1;
-        }
+        porPrecio = minPrecioFloat < maxPrecioFloat && 1;
     }
     if(minRangoFloat !="min range" && maxRangoFloat !="max range")
     {
-        if(minRangoFloat < maxRangoFloat){
-            porRango = 1;
-        }
+        porRango=minRangoFloat < maxRangoFloat && 1;
+       
+
     }
     
+
     let seleccion  = document.getElementById("selectTipo");
     let selected =seleccion.options[seleccion.selectedIndex].text;
-    console.log(selected);
+    
+
+
+    
+    
+    
+    console.log("Seleccionado antes "+selected);
     console.log("por precio "+porPrecio+" por Rango "+porRango+" MinPrecio"+ minPrecioFloat+ " maxPrecio "+maxPrecioFloat+" minRango "+minRangoFloat+" maxRango "+maxRangoFloat);
  
     if(porPrecio == 1 && porRango == 0 && (selected.toLowerCase()=="vehicle type"||selected.toLowerCase()=='all types'))// busqueda por precio
@@ -246,6 +293,15 @@ function buscar(){
          listProducts(productos);
     }
 
+    console.log("lo que esta seleccionado es "+selected.toLowerCase());
+    if(porPrecio == 0 && porRango == 0 && selected.toLowerCase()=="my favorites") // All
+    {    
+      
+        const resultado = productos.filter((el) => el.liked.toLowerCase() == "y"); 
+         console.log("likeados");
+         listProducts(resultado);
+    }
+
     
     
       
@@ -260,7 +316,9 @@ function listProducts(lista){
     let product;
     
     for (const producto of lista){
-
+        // Desesctructuracion del objeto producto
+        let {precio, rango, imageName, topFeature1, topFeature2, topFeature3,id, modelo, marca } = producto;
+     
         console.log("id que llega "+producto.id+" liked o no "+producto.liked);
         product = document.createElement("div");
         product.className = "product";
@@ -273,33 +331,39 @@ function listProducts(lista){
 
         
         let liked = document.createElement("img");
-        if(producto.liked =="Y")
+
+        //Uso de operador ternario
+        producto.liked=="Y"? liked.src= "../images/liked.png" : liked.src= "../images/unliked.png";
+        /*if(producto.liked =="Y")
         {
             liked.src= "../images/liked.png";
         }
         else{
             liked.src= "../images/unliked.png";
-        }
-        liked.id="like"+producto.id;
+        }*/
+        liked.id="like"+id;
         console.log("en la creacion "+liked.id);
         liked.className="bi bi-card-image"
         likeCont.appendChild(liked);
-        
+        //Desestructuracion de producto tomando solo imageName
+       
+        console.log("imagen luego de desesctructuracion "+ imageName)
         let image= document.createElement("img");
-        image.src="../images/"+producto.imageName;
+        image.src="../images/"+imageName;
         image.className = "card-img-top w-100 h-100";
-        image.alt=producto.modelo;
+        image.alt=modelo;
         let cardBody = document.createElement("div");
         cardBody.className="card-body";
-        cardBody.innerHTML = `<h5 class="card-title">${producto.marca}${producto.modelo}</h5>
+        cardBody.innerHTML = `<h5 class="card-title">${marca}${modelo}</h5>
         <p class="card-text">Top features include:</p>`;
         let listGroup = document.createElement("ul");
         listGroup.className = "list-group list-group-flush";
-        listGroup.innerHTML = `<li class="list-group-item">${producto.topFeature1}</li>
-        <li class="list-group-item">${producto.topFeature2}</li>
-        <li class="list-group-item">${producto.topFeature3}</li>
-        <li class="list-group-item">Price: $${producto.precio}</li>
-        <li class="list-group-item">Max Range: ${producto.rango} Miles</li>`
+        
+        listGroup.innerHTML = `<li class="list-group-item">${topFeature1}</li>
+        <li class="list-group-item">${topFeature2}</li>
+        <li class="list-group-item">${topFeature3}</li>
+        <li class="list-group-item">Price: $${precio}</li>
+        <li class="list-group-item">Max Range: ${rango} Miles</li>`
 
         let buttonBuy = document.createElement("a");
         buttonBuy.className="btn btn-warning";
