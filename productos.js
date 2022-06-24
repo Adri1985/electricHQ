@@ -423,7 +423,7 @@ function listProducts(lista){
                 localStorage.setItem("liked", JSON.stringify(likedIds));
                 Toastify({
                     text: "Unliked!",
-                    duration: 2000
+                    duration: 3000,
                     }).showToast();
             }
         });
