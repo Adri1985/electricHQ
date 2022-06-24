@@ -367,7 +367,8 @@ function listProducts(lista){
 
         let buttonBuy = document.createElement("a");
         buttonBuy.className="btn btn-warning";
-        buttonBuy.textContent="BUY NOW";
+        buttonBuy.textContent="ADD TO CART";
+        buttonBuy.id = "buy"+id;
         let buttonReview = document.createElement("a");
         buttonReview.className = "btn btn-light";
         buttonReview.textContent = "REQUEST REVIEW";
@@ -403,7 +404,15 @@ function listProducts(lista){
                 console.log(likedIds);
                 console.log(JSON.stringify(likedIds));
                 localStorage.setItem("liked", JSON.stringify(likedIds));
-            }
+                console.log("antes de toastify");
+                Toastify({
+                    text: "Liked!",
+                    duration: 3000
+                    }).showToast();
+                    console.log("despues de toastify");
+                    
+                }
+                
             else{
                 console.log("liked");
                 producto.liked ="Y";
@@ -412,8 +421,18 @@ function listProducts(lista){
                 console.log(likedIds);
                 console.log(JSON.stringify(likedIds));
                 localStorage.setItem("liked", JSON.stringify(likedIds));
+                Toastify({
+                    text: "Unliked!",
+                    duration: 2000
+                    }).showToast();
             }
         });
+        let botCart = document.getElementById("buy"+producto.id);
+        botCart.addEventListener('click',()=>{
+            Swal.fire(
+                producto.tipo+" "+producto.modelo+" "+"agregado al carrito");
+              
+        })
 
     }
     
