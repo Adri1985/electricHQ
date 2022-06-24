@@ -406,8 +406,8 @@ function listProducts(lista){
                 localStorage.setItem("liked", JSON.stringify(likedIds));
                 console.log("antes de toastify");
                 Toastify({
-                    text: "Liked!",
-                    duration: 3000
+                    text: "Unliked!",
+                    duration: 2000
                     }).showToast();
                     console.log("despues de toastify");
                     
@@ -422,8 +422,8 @@ function listProducts(lista){
                 console.log(JSON.stringify(likedIds));
                 localStorage.setItem("liked", JSON.stringify(likedIds));
                 Toastify({
-                    text: "Unliked!",
-                    duration: 3000,
+                    text: "Liked!",
+                    duration: 2000,
                     }).showToast();
             }
         });
