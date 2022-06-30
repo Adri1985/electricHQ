@@ -4,7 +4,7 @@ const productos=[];
 
 function obtenerProductosJson(){
     console.log("antes del fetch");
-    const URLJSON = "/git/productos.json";
+    const URLJSON = "../productos.json";
     fetch(URLJSON)
         .then((respuesta)=>respuesta.json())
         .then((data)=>{
