@@ -1,5 +1,32 @@
 let likedIds=[];
 
+const productos=[];
+
+function obtenerProductosJson(){
+    console.log("antes del fetch");
+    const URLJSON = "/git/productos.json";
+    fetch(URLJSON)
+        .then((respuesta)=>respuesta.json())
+        .then((data)=>{
+            console.log("data "+data.productos);
+            for (const producto of data.productos){
+                productos.push(new Producto(producto.id,producto.marca, producto.modelo, producto.tipo,producto.rango, producto.precio, producto.topFeature1, producto.topFeature2, producto.topFeature3, producto.imageName, producto.liked));
+            }
+            console.log("productos de json "+productos);
+           
+            createSelectType();
+            setFromStorage();
+
+            listProducts(productos);
+            validations();
+            
+        })
+        console.log("despues del fetch");
+}
+
+obtenerProductosJson();
+
+
 class Producto{
     constructor(id, marca, modelo, tipo, rango, precio, topFeature1, topFeature2, topFeature3, imageName, liked){
         this.id = id;
@@ -16,8 +43,7 @@ class Producto{
     }
 }
 
-const productos=[];
-productos.push(new Producto ("1","Evolve", "Hadean Carbon 2", "Skateboard", 30, 400,"AT and Street wheels","30mph top speed", "35% hill climbing ability", "product1.png", "N"));
+/*productos.push(new Producto ("1","Evolve", "Hadean Carbon 2", "Skateboard", 30, 400,"AT and Street wheels","30mph top speed", "35% hill climbing ability", "product1.png", "N"));
 
 productos.push(new Producto ("2","Meepo", "V4 Shuffle", "Skateboard", 25, 100,"Dual 620W motors","Weight 16 lbs", "New M4S remote", "product2.png", "N"));
 
@@ -33,11 +59,11 @@ productos.push(new Producto ("6","Rambo", "Bushwacker", "Bike", 30, 400,"Rambo C
 productos.push(new Producto ("7", "Yamaha", "RDS300", "SeaScooter", 25, 100,"Run up to 1.5 hours","Rated to 100ft / 30m", "Waterproof construction", "product7.png","N"));
 
 productos.push(new Producto ("8", "Eunorau", "Carve Surfboard", "Electric Surfboard", 25, 400,"Jetpack G3","Acceleration: 0-25 in 9.7s", "Board Weight: 20 lbs", "product8.png","N"));
-
+*/
 
 //ACA hacemos la carga inicial de likes si hay algo en el local storage
 
-setFromStorage();
+
 
 function setFromStorage(){
     let likedArrayFromStorage = localStorage.getItem("liked");
@@ -62,9 +88,9 @@ function setFromStorage(){
 
 
 
-listProducts(productos);
+//listProducts(productos);
 
-createSelectType();
+//createSelectType();
 
 
 //createSelectType va a crear el primer drop down dentro del formulario de producto, listando solo aquellos tipos de productos en stock
@@ -118,91 +144,95 @@ function createSelectType(){
 
 }
 
-let minPrecio = document.getElementById("minPrecio");
-let maxPrecio = document.getElementById("maxPrecio");
-let minRange = document.getElementById("minRange");
-let maxRange = document.getElementById("maxRange");
-let countries = document.getElementById("countries");
-let newCheck = document.getElementById("new");
-let preOwnedCheck = document.getElementById("preowned");
-countries.disabled=true;
-preOwnedCheck.disabled=true;
-newCheck.disabled=true;
+function validations(){
 
-minPrecio.addEventListener('input', () => {
-    if(isNaN(minPrecio.value)){
-        alert("el precio debe ser numerico");
-        minPrecio.value="";
-    }
-    else if(minPrecio.value <0 )
-    {   
-        alert("el precio debe ser mayor a 0");
-        minPrecio.value="";
-    }
-});
-maxPrecio.addEventListener('input', () => {
-    if(isNaN(maxPrecio.value)){
-        alert("el precio debe ser numerico");
-        maxPrecio.value="";
-    }
-    else if(maxPrecio.value <0 )
-    {   
-        alert("el precio debe ser mayor a 0");
-        maxPrecio.value="";
-    } 
-});
-minRange.addEventListener('input', () => {
-    if(isNaN(minRange.value)){
-        alert("el rango debe ser numerico");
-        minRange.value="";
-    }
-    else if(minRange.value <0 )
-    {   
-        alert("el rango debe ser mayor a 0");
-        minRange.value="";
-    }  
-});
-maxRange.addEventListener('input', () => {
-    if(isNaN(maxRange.value)){
-        alert("el rango debe ser numerico");
-        maxRange.value="";
-    }
-    else if(maxRange.value <0 )
-    {   
-        alert("el rango debe ser mayor a 0");
-        maxRange.value="";
-    }   
-});
-
-/*let temperatura = 31;
-temperatura>30? console.log("hace calor"): console.log("no hace calor"); porque aca no funciona?*/ 
-
-let seleccion  = document.getElementById("selectTipo");
-
-    seleccion.addEventListener('change', function() {
-        let selectedFav =seleccion.options[seleccion.selectedIndex].text;
-        console.log('You selected: ', selectedFav);
-        if(selectedFav.toLowerCase()=="my favorites"){
-            console.log("selecciono my favorites");
-            minPrecio.disabled=true;
-            maxPrecio.disabled=true;
-            minRange.disabled=true;
-            maxRange.disabled=true;
+    let minPrecio = document.getElementById("minPrecio");
+    let maxPrecio = document.getElementById("maxPrecio");
+    let minRange = document.getElementById("minRange");
+    let maxRange = document.getElementById("maxRange");
+    let countries = document.getElementById("countries");
+    let newCheck = document.getElementById("new");
+    let preOwnedCheck = document.getElementById("preowned");
+    countries.disabled=true;
+    preOwnedCheck.disabled=true;
+    newCheck.disabled=true;
+    
+    minPrecio.addEventListener('input', () => {
+        if(isNaN(minPrecio.value)){
+            alert("el precio debe ser numerico");
+            minPrecio.value="";
         }
-        else
-        {   minPrecio.disabled=false;
-            maxPrecio.disabled=false;
-            minRange.disabled=false;
-            maxRange.disabled=false;
+        else if(minPrecio.value <0 )
+        {   
+            alert("el precio debe ser mayor a 0");
+            minPrecio.value="";
         }
     });
-    let selected =seleccion.options[seleccion.selectedIndex].text;
+    maxPrecio.addEventListener('input', () => {
+        if(isNaN(maxPrecio.value)){
+            alert("el precio debe ser numerico");
+            maxPrecio.value="";
+        }
+        else if(maxPrecio.value <0 )
+        {   
+            alert("el precio debe ser mayor a 0");
+            maxPrecio.value="";
+        } 
+    });
+    minRange.addEventListener('input', () => {
+        if(isNaN(minRange.value)){
+            alert("el rango debe ser numerico");
+            minRange.value="";
+        }
+        else if(minRange.value <0 )
+        {   
+            alert("el rango debe ser mayor a 0");
+            minRange.value="";
+        }  
+    });
+    maxRange.addEventListener('input', () => {
+        if(isNaN(maxRange.value)){
+            alert("el rango debe ser numerico");
+            maxRange.value="";
+        }
+        else if(maxRange.value <0 )
+        {   
+            alert("el rango debe ser mayor a 0");
+            maxRange.value="";
+        }   
+    });
     
-
-
-
-let boton = document.getElementById("botonBusqueda");
-boton.addEventListener("click", buscar);
+    /*let temperatura = 31;
+    temperatura>30? console.log("hace calor"): console.log("no hace calor"); porque aca no funciona?*/ 
+    
+    let seleccion  = document.getElementById("selectTipo");
+    
+        seleccion.addEventListener('change', function() {
+            let selectedFav =seleccion.options[seleccion.selectedIndex].text;
+            console.log('You selected: ', selectedFav);
+            if(selectedFav.toLowerCase()=="my favorites"){
+                console.log("selecciono my favorites");
+                minPrecio.disabled=true;
+                maxPrecio.disabled=true;
+                minRange.disabled=true;
+                maxRange.disabled=true;
+            }
+            else
+            {   minPrecio.disabled=false;
+                maxPrecio.disabled=false;
+                minRange.disabled=false;
+                maxRange.disabled=false;
+            }
+        });
+        let selected =seleccion.options[seleccion.selectedIndex].text;
+        
+    
+    
+    
+    let boton = document.getElementById("botonBusqueda");
+    boton.addEventListener("click", buscar);
+    
+}
 
 function buscar(){
     let porPrecio = 0;
