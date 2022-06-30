@@ -1,6 +1,7 @@
 let likedIds=[];
 
 const productos=[];
+let carritoArray=[];
 
 function obtenerProductosJson(){
     console.log("antes del fetch");
@@ -43,26 +44,6 @@ class Producto{
     }
 }
 
-/*productos.push(new Producto ("1","Evolve", "Hadean Carbon 2", "Skateboard", 30, 400,"AT and Street wheels","30mph top speed", "35% hill climbing ability", "product1.png", "N"));
-
-productos.push(new Producto ("2","Meepo", "V4 Shuffle", "Skateboard", 25, 100,"Dual 620W motors","Weight 16 lbs", "New M4S remote", "product2.png", "N"));
-
-productos.push(new Producto ("3","Meepo", "Mini 2 Standard", "Skateboard", 30, 300,"29 mph top speed","versatile deck", "18 miles range", "product3.png","N"));
-
-productos.push(new Producto ("4","Eunorau", "FAT-HS 1000", "Bike", 25, 400,"Shimano Deore 9-speed shifter","1000W Bafang motor", "40-mile range", "product4.png","N"));
-
-productos.push(new Producto ("5","Jupiter", "Defiant", "Bike", 20, 1000,
-"300 lbs payload capacity","ront & rear disc brakes", "750W brushless hub motor", "product5.png","N"));
-
-productos.push(new Producto ("6","Rambo", "Bushwacker", "Bike", 30, 400,"Rambo Custom built chain rim","Digital on-board display", "Tektro hydraulic piston brakes", "product6.png","N" ));
-
-productos.push(new Producto ("7", "Yamaha", "RDS300", "SeaScooter", 25, 100,"Run up to 1.5 hours","Rated to 100ft / 30m", "Waterproof construction", "product7.png","N"));
-
-productos.push(new Producto ("8", "Eunorau", "Carve Surfboard", "Electric Surfboard", 25, 400,"Jetpack G3","Acceleration: 0-25 in 9.7s", "Board Weight: 20 lbs", "product8.png","N"));
-*/
-
-//ACA hacemos la carga inicial de likes si hay algo en el local storage
-
 
 
 function setFromStorage(){
@@ -85,12 +66,6 @@ function setFromStorage(){
 
     }
 }
-
-
-
-//listProducts(productos);
-
-//createSelectType();
 
 
 //createSelectType va a crear el primer drop down dentro del formulario de producto, listando solo aquellos tipos de productos en stock
@@ -262,10 +237,6 @@ function buscar(){
     let selected =seleccion.options[seleccion.selectedIndex].text;
     
 
-
-    
-    
-    
     console.log("Seleccionado antes "+selected);
     console.log("por precio "+porPrecio+" por Rango "+porRango+" MinPrecio"+ minPrecioFloat+ " maxPrecio "+maxPrecioFloat+" minRango "+minRangoFloat+" maxRango "+maxRangoFloat);
  
@@ -340,6 +311,17 @@ function buscar(){
 }
 
 function listProducts(lista){
+   
+    let nav = document.getElementById("nav");
+
+    let carrito = document.createElement("select");
+    carrito.className = "form-select form-select w-100 mb-3";
+    carrito.id = "carrito";
+    carrito.innerHTML = `<option selected>Shopping bag</option>`;
+    let buttonCompleteOrder = document.createElement("a");
+    buttonCompleteOrder.className="btn btn-warning";
+    buttonCompleteOrder.textContent="COMPLETE ORDER";
+    buttonCompleteOrder.id = "buy";
     console.log("Lista con tamaño: "+lista.length);
     let container = document.getElementById("products");
     container.innerHTML=``;
@@ -458,15 +440,59 @@ function listProducts(lista){
             }
         });
         let botCart = document.getElementById("buy"+producto.id);
+        
         botCart.addEventListener('click',()=>{
             Swal.fire(
                 producto.tipo+" "+producto.modelo+" "+"agregado al carrito");
+                let iteracion;
+                let total=0;
+                carritoArray.push(producto);
+                console.log("producto agregado al carrito "+producto);
+                console.log("carrito array ;" +producto.modelo);
+                carrito.innerHTML = `<option selected>Shopping bag (${carritoArray.length})</option>`;
+               
+                for(const compra of carritoArray){
+                    iteracion++;
+                    carrito.innerHTML = carrito.innerHTML+`<option value="${iteracion}">${compra.tipo} ${compra.modelo}</option>`
+                    console.log("iteracion "+iteracion);
+                    console.log("precio "+compra.precio);
+                    total += parseFloat(compra.precio);
+                }
+                iteracion++;
+                carrito.innerHTML = carrito.innerHTML+`<option value="${iteracion}">Total:$ ${total}</option>`
+            
+               
+                
+                
+                nav.prepend(buttonCompleteOrder);
+                nav.prepend(carrito);
+                buttonCompleteOrder.addEventListener('click',()=>{
+                    console.log("hacec click");
+                    finalizarCompra();
+                })
               
         })
 
     }
     
 
+}
+
+function finalizarCompra(){
+    listProducts(carritoArray);
+    /*console.log("entra en finalizar compra");
+    let contenedor = document.getElementById("products");
+    let contenedorVentas;
+    console.log("carritoArray lenght"+carritoArray.length);
+        for(const producto of carritoArray){
+             contenedorVentas= document.createElement("div");
+            let item = document.createElement("ul");
+            item.innerHTML=`<li>${producto.modelo}</li>`
+            contenedorVentas.appendChild(item);
+
+        }
+        contenedor.innerHTML='';
+        contenedor.append=contenedorVentas;*/
 }
 
 //Storage
