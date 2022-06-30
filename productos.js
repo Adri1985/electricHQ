@@ -312,7 +312,7 @@ function buscar(){
 
 function listProducts(lista){
    
-    let nav = document.getElementById("nav");
+    let nav = document.getElementById("carrito");
 
     let carrito = document.createElement("select");
     carrito.className = "form-select form-select w-100 mb-3";
