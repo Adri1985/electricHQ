@@ -2,6 +2,8 @@ let likedIds = [];
 
 const productos = [];
 let carritoArray = [];
+let carritoArrayFinal =[];
+let encontrado;
 
 function obtenerProductosJson() {
     console.log("antes del fetch");
@@ -42,6 +44,13 @@ class Producto {
         this.imageName = imageName;
         this.liked = liked;
     }
+}
+
+class CarritoItem{
+    constructor(producto, cant){
+        this.producto = producto;
+        this.cant = cant
+    };
 }
 
 
@@ -433,14 +442,37 @@ function listProducts(lista) {
 
         botCart.addEventListener('click', () => {
             Swal.fire(
-                producto.tipo + " " + producto.modelo + " " + "agregado al carrito");
+            producto.tipo + " " + producto.modelo + " " + "agregado al carrito");
             let iteracion;
             let total = 0;
+            
             carritoArray.push(producto);
             console.log("producto agregado al carrito " + producto);
             console.log("carrito array ;" + producto.modelo);
             carrito.innerHTML = `<option selected>Shopping bag (${carritoArray.length})</option>`;
+            
+            console.log("longitud del carrito "+ carritoArray.length);
 
+           
+           
+            //prueba
+           
+            encontrado= carritoArrayFinal.find((el)=>el.producto.id == producto.id);
+                
+            if (encontrado == undefined)
+            {
+                    
+                console.log("no encontro, hace el push");
+                carritoArrayFinal.push(new CarritoItem(producto, 1));
+                console.log("producto agregado "+producto.modelo);
+            }
+            else
+            {
+
+                encontrado.cant+=1;
+                console.log("encontrado "+encontrado.producto.modelo+" cantidad"+ encontrado.cant)
+            }
+           
             for (const compra of carritoArray) {
                 iteracion++;
                 carrito.innerHTML = carrito.innerHTML + `<option value="${iteracion}">${compra.tipo} ${compra.modelo}</option>`
@@ -464,11 +496,16 @@ function listProducts(lista) {
         })
 
     }
+    
 
 
 }
 
 function finalizarCompra() {
+    for (const element of carritoArrayFinal)
+    {
+        console.log("carritoArrayFinal"+ element.producto.modelo+ "cantidad "+element.cant);
+    }
     let contenedorCheckout = document.getElementById("principal");
     contenedorCheckout.innerHTML = "";
     let sectionPrincipal = document.createElement("section");
@@ -493,16 +530,18 @@ function finalizarCompra() {
     title.innerText = "Your products";
     div7.appendChild(title);
     let divProd1;
-    let total=0;
+    let totalInicial=0;
 
-    for (const producto of carritoArray) {
+    for (const item of carritoArrayFinal) {
         console.log("pasa por carrito");
+        totalInicial=totalInicial+parseFloat(item.producto.precio)*parseInt(item.cant);
+        console.log("totalInicial"+ totalInicial);
         divProd1 = document.createElement("div");
         divProd1.className = "d-flex align-items-center mb-5";
         let divProd2 = document.createElement("div");
         divProd2.className = "flex-shrink-0";
         let imageProd = document.createElement("img");
-        imageProd.src = "../images/" + producto.imageName;
+        imageProd.src = "../images/" + item.producto.imageName;
         imageProd.className = "img-fluid";
         imageProd.style = "width: 150px;"
         imageProd.alt = "Generic placeholder image"
@@ -510,35 +549,53 @@ function finalizarCompra() {
         let divProd3 = document.createElement("div");
         divProd3.className = "flex-grow-1 ms-3";//append abajo
         divProd3.innerHTML =`<a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
-        <h5 class="text-primary">${producto.marca} ${producto.modelo}</h5`;
+        <h5 class="text-primary">${item.producto.marca} ${item.producto.modelo}</h5`;
         let divProd4 = document.createElement("div");
         divProd4.className = "d-flex align-items-center";
-        divProd4.innerHTML = `<p class="fw-bold mb-0 me-5 pe-3">${producto.precio}$ </p>`
+        divProd4.innerHTML = 
+        `<p class="fw-bold mb-0 me-5 pe-3">unit price ${item.producto.precio}$</p>`
         let divProd5 = document.createElement("div");
         divProd5.className = "def-number-input number-input safari_only";
         let input = document.createElement("input");
         input.className = "quantity fw-bold text-black";
         input.min = "0";
         input.name = "quantity";
-        input.value = "1";
+        input.value = item.cant;
         input.type = "number";
-        input.id = "input"+producto.id;
+        input.id = "input"+item.producto.id;
         let button = document.createElement("button");
         button.className = "minus";
         button.addEventListener('click', ()=>{
+            console.log("click minus");
             let cant = parseInt(input.value)-1;
             if (cant >=0)
             {
                 input.value = cant;
+                totalInicial = totalInicial-parseFloat(item.producto.precio);
+                let divTotal=document.getElementById("divTotal");
+                divTotal.innerHTML=`<h4 class="fw-bold mb-0 totales">Total:</h4>
+                <h4 class="fw-bold mb-0 totales">${totalInicial}$</h4>
+                `
             }
+            
             
         })
         
         let button2 = document.createElement("button");
         button2.className = "plus";
         button2.addEventListener('click', ()=>{
+            console.log("click plus");
             input.value = parseInt(input.value)+1;
+           
+            //totalInicial = totalInicial - producto.precio;
+            totalInicial = totalInicial+parseFloat(item.producto.precio);
+            
+            let divTotal=document.getElementById("divTotal");
+            divTotal.innerHTML=`<h4 class="fw-bold mb-0 totales">Total:</h4>
+            <h4 class="fw-bold mb-0 totales">${totalInicial}$</h4>
+            `
         })
+        //console.log("totalPlus"+totalPlus);
         divProd5.appendChild(button);
         divProd5.appendChild(input);
         divProd5.appendChild(button2);
@@ -548,21 +605,30 @@ function finalizarCompra() {
         divProd1.appendChild(divProd2);
         divProd1.appendChild(divProd2);
         div7.appendChild(divProd1);
-        total = parseFloat(total)+parseFloat(producto.precio);
+
+        
+       
         
 
     }
-    div7.innerHTML = div7.innerHTML +
-    `<hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
-    <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+  
+    divTotal = document.createElement("div");
+    divTotal.id="divTotal";
+    divTotal.className ="d-flex justify-content-between p-2 mb-2";
+    divTotal.style="background-color: #e1f5fe;";
+    divTotal.innerHTML=`<h4 class="fw-bold mb-0 totales">Total:</h4>
+    <h4 class="fw-bold mb-0 totales">${totalInicial}$</h4>
+    `
+    div7.append(divTotal);
+    /*<div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
       <h4 class="fw-bold mb-0 totales">Total:</h4>
       <h4 class="fw-bold mb-0 totales">${total}$</h4>
     </div>
-    `
+    `*/
     let div8 = document.createElement("div");
     div8.className ="col-lg-6 px-5 py-4";
     div8.innerHTML=`
-    <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
+    <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase" style="color:black;">Payment </h3>
                   <form class="mb-5">
                     <div class="form-outline mb-5">
                       <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
@@ -592,7 +658,7 @@ function finalizarCompra() {
                     </div>
                     <p class="mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit <a
                         href="#!">obcaecati sapiente</a>.</p>
-                    <button type="button" class="btn btn-primary btn-block btn-lg">Buy now</button>
+                    <button type="button" id="fin" class="btn btn-primary btn-block btn-lg">Buy now</button>
   
                     <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
                       <a href="products.html" id="continueShopping"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
@@ -611,6 +677,11 @@ function finalizarCompra() {
     sectionPrincipal.appendChild(div1);
     
     contenedorCheckout.appendChild(sectionPrincipal);
+
+    let fin = document.getElementById("fin");
+    fin.addEventListener('click', () => {
+        Swal.fire("Thanks for shopping Electric HQ");
+    })
 
 
 
