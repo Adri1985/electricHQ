@@ -553,7 +553,7 @@ function finalizarCompra() {
         let divProd4 = document.createElement("div");
         divProd4.className = "d-flex align-items-center";
         divProd4.innerHTML = 
-        `<p class="fw-bold mb-0 me-5 pe-3">unit price ${item.producto.precio}$</p>`
+        `<p class="fw-bold mb-0 me-5 pe-3">unit${item.producto.precio}$</p>`
         let divProd5 = document.createElement("div");
         divProd5.className = "def-number-input number-input safari_only";
         let input = document.createElement("input");
