@@ -553,7 +553,7 @@ function finalizarCompra() {
         let divProd4 = document.createElement("div");
         divProd4.className = "d-flex align-items-center";
         divProd4.innerHTML = 
-        `<p class="fw-bold mb-0 me-5 pe-3">${item.producto.precio}$</p>`
+        `<p class="fw-bold mb-0 me-5 pe-3">Price:${item.producto.precio}$</p>`
         let divProd5 = document.createElement("div");
         divProd5.className = "def-number-input number-input safari_only";
         let input = document.createElement("input");
@@ -572,6 +572,8 @@ function finalizarCompra() {
             {
                 input.value = cant;
                 totalInicial = totalInicial-parseFloat(item.producto.precio);
+               
+                
                 let divTotal=document.getElementById("divTotal");
                 divTotal.innerHTML=`<h4 class="fw-bold mb-0 totales">Total:</h4>
                 <h4 class="fw-bold mb-0 totales">${totalInicial}$</h4>
@@ -589,6 +591,7 @@ function finalizarCompra() {
            
             //totalInicial = totalInicial - producto.precio;
             totalInicial = totalInicial+parseFloat(item.producto.precio);
+          
             
             let divTotal=document.getElementById("divTotal");
             divTotal.innerHTML=`<h4 class="fw-bold mb-0 totales">Total:</h4>
