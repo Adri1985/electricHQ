@@ -1,9 +1,12 @@
 let likedIds = [];
+let carritoStorage =[];
 
 const productos = [];
 let carritoArray = [];
 let carritoArrayFinal =[];
+
 let encontrado;
+let carrito=[];
 
 function obtenerProductosJson() {
     console.log("antes del fetch");
@@ -16,12 +19,12 @@ function obtenerProductosJson() {
                 productos.push(new Producto(producto.id, producto.marca, producto.modelo, producto.tipo, producto.rango, producto.precio, producto.topFeature1, producto.topFeature2, producto.topFeature3, producto.imageName, producto.liked));
             }
             console.log("productos de json " + productos);
-
-            createSelectType();
             setFromStorage();
-
+            mostrarCarrito();
+            createSelectType();
             listProducts(productos);
             validations();
+            
 
         })
     console.log("despues del fetch");
@@ -57,6 +60,7 @@ class CarritoItem{
 
 function setFromStorage() {
     let likedArrayFromStorage = localStorage.getItem("liked");
+    let cartFromStorage = localStorage.getItem("cart");
     if (likedArrayFromStorage != null) {
         likedIds = JSON.parse(likedArrayFromStorage);
         console.log("likeIds");
@@ -71,6 +75,18 @@ function setFromStorage() {
 
         }
 
+    }
+    if(cartFromStorage != null){
+        cart = JSON.parse(cartFromStorage);
+        for(const producto of productos){
+            for (i = 0; i < cart.length; i++) {
+                if (producto.id == cart[i]) {
+                    carritoArray.push(producto);
+                }
+            }
+
+        }
+        console.log("storage carrito "+carritoArray.length);
     }
 }
 
@@ -310,19 +326,48 @@ function buscar() {
 
 }
 
+function mostrarCarrito()
+{   
+        console.log("entra en mostrar carrito "+carritoArray.length);
+        let carritoDom = document.getElementById("carrito");
+        carritoDom.innerHTML = "";
+        let cant=document.getElementById("cantidad");
+        cant.innerHTML="";
+        
+        if(carritoArray.length>0)
+        {
+            console.log("entra en >0");
+            cant.innerHTML=`<p style="color:orange;">${carritoArray.length}</p>`
+        }
+        
+
+       
+        let carro=document.createElement("img");
+            carro.src="../images/cart.png"
+            carro.addEventListener('click',()=>{
+                if(carritoArray.length>0){
+                    finalizarCompra();
+                }else
+                {
+                    Swal.fire("Cart is empty");
+                }
+
+                
+            });
+            carritoDom.appendChild(carro);
+            
+
+            
+        /*ejecucion != 1 ? localStorage.setItem("listacarr", JSON.stringify(carrito)) : "";
+        carrito.forEach(auto => { document.getElementById("btnrmv" + auto.id).addEventListener("click", function () { sacarCarrito(auto) }) });*/
+    
+    
+    }
+
+
 function listProducts(lista) {
 
-    let nav = document.getElementById("carrito");
-
-    let carrito = document.createElement("select");
-    carrito.className = "form-select form-select w-100 mb-3";
-    carrito.id = "carrito";
-    carrito.innerHTML = `<option selected>Shopping bag</option>`;
-    let buttonCompleteOrder = document.createElement("a");
-    buttonCompleteOrder.className = "btn btn-warning";
-    buttonCompleteOrder.textContent = "COMPLETE ORDER";
-    buttonCompleteOrder.id = "buy";
-    console.log("Lista con tamaño: " + lista.length);
+ 
     let container = document.getElementById("products");
     container.innerHTML = ``;
     let product;
@@ -378,8 +423,17 @@ function listProducts(lista) {
         <li class="list-group-item">Max Range: ${rango} Miles</li>`
 
         let buttonBuy = document.createElement("a");
-        buttonBuy.className = "btn btn-warning";
-        buttonBuy.textContent = "ADD TO CART";
+        if (carritoArray.some((el) => el.id == producto.id)) 
+        {
+            buttonBuy.className = "btn btn-secondary";
+            buttonBuy.textContent = "REMOVE FROM CART";
+        }
+        else
+        {
+            buttonBuy.className = "btn btn-warning";
+            buttonBuy.textContent = "ADD TO CART";
+        }
+       
         buttonBuy.id = "buy" + id;
         let buttonReview = document.createElement("a");
         buttonReview.className = "btn btn-light";
@@ -440,72 +494,52 @@ function listProducts(lista) {
         });
         let botCart = document.getElementById("buy" + producto.id);
 
-        botCart.addEventListener('click', () => {
-            Swal.fire(
-            producto.tipo + " " + producto.modelo + " " + "agregado al carrito");
-            let iteracion;
-            let total = 0;
-            
-            carritoArray.push(producto);
-            console.log("producto agregado al carrito " + producto);
-            console.log("carrito array ;" + producto.modelo);
-            carrito.innerHTML = `<option selected>Shopping bag (${carritoArray.length})</option>`;
-            
-            console.log("longitud del carrito "+ carritoArray.length);
-
-           
-           
-            //prueba
-           
-            encontrado= carritoArrayFinal.find((el)=>el.producto.id == producto.id);
-                
-            if (encontrado == undefined)
+        botCart.addEventListener('click',()=>{
+            if(botCart.textContent == "REMOVE FROM CART")
             {
-                    
-                console.log("no encontro, hace el push");
-                carritoArrayFinal.push(new CarritoItem(producto, 1));
-                console.log("producto agregado "+producto.modelo);
+                carritoArray.pop(producto);
+                carritoStorage.pop(producto.id);
+                localStorage.setItem("cart", JSON.stringify(carritoStorage));
+                botCart.className ="btn btn-warning";
+                botCart.textContent ="ADD TO CART";
+                mostrarCarrito();
             }
             else
             {
-
-                encontrado.cant+=1;
-                console.log("encontrado "+encontrado.producto.modelo+" cantidad"+ encontrado.cant)
+                console.log("haciendo click en "+producto.id);
+                carritoArray.forEach(element => console.log("nombre "+element.modelo));
+        
+                if (carritoArray.some((el) => el.id == producto.id)) 
+                {
+                    Swal.fire("Product already in cart. You can modify quantity at checkout process");
+                }
+                else
+                {
+                    Swal.fire(
+                    producto.tipo + " " + producto.modelo + " " + "agregado al carrito");
+                    let iteracion;
+                    let total = 0;
+                    carritoStorage.push(producto.id);
+                    localStorage.setItem("cart", JSON.stringify(carritoStorage));
+                    carritoArray.push(producto); 
+                    console.log("longitud del carrito "+ carritoArray.length);
+                    botCart.className = "btn btn-secondary";
+                    botCart.textContent ="REMOVE FROM CART";
+                    mostrarCarrito();
+                }
+            
+         
             }
-           
-            for (const compra of carritoArray) {
-                iteracion++;
-                carrito.innerHTML = carrito.innerHTML + `<option value="${iteracion}">${compra.tipo} ${compra.modelo}</option>`
-                console.log("iteracion " + iteracion);
-                console.log("precio " + compra.precio);
-                total += parseFloat(compra.precio);
-            }
-            iteracion++;
-            carrito.innerHTML = carrito.innerHTML + `<option value="${iteracion}">Total:$ ${total}</option>`
 
-
-
-
-            nav.prepend(buttonCompleteOrder);
-            nav.prepend(carrito);
-            buttonCompleteOrder.addEventListener('click', () => {
-                console.log("hacec click");
-                finalizarCompra();
-            })
-
-        })
-
-    }
+    });
     
-
+    
+}
 
 }
 
 function finalizarCompra() {
-    for (const element of carritoArrayFinal)
-    {
-        console.log("carritoArrayFinal"+ element.producto.modelo+ "cantidad "+element.cant);
-    }
+   
     let contenedorCheckout = document.getElementById("principal");
     contenedorCheckout.innerHTML = "";
     let sectionPrincipal = document.createElement("section");
@@ -527,21 +561,22 @@ function finalizarCompra() {
     let div7 = document.createElement("div");
     div7.className = "col-lg-6 px-5 py-4";
     let title = document.createElement("h3");
+    title.style="color:black;"
     title.innerText = "Your products";
     div7.appendChild(title);
     let divProd1;
     let totalInicial=0;
 
-    for (const item of carritoArrayFinal) {
+    for (const item of carritoArray) {
         console.log("pasa por carrito");
-        totalInicial=totalInicial+parseFloat(item.producto.precio)*parseInt(item.cant);
+        totalInicial=totalInicial+parseFloat(item.precio);
         console.log("totalInicial"+ totalInicial);
         divProd1 = document.createElement("div");
         divProd1.className = "d-flex align-items-center mb-5";
         let divProd2 = document.createElement("div");
         divProd2.className = "flex-shrink-0";
         let imageProd = document.createElement("img");
-        imageProd.src = "../images/" + item.producto.imageName;
+        imageProd.src = "../images/" + item.imageName;
         imageProd.className = "img-fluid";
         imageProd.style = "width: 150px;"
         imageProd.alt = "Generic placeholder image"
@@ -549,20 +584,20 @@ function finalizarCompra() {
         let divProd3 = document.createElement("div");
         divProd3.className = "flex-grow-1 ms-3";//append abajo
         divProd3.innerHTML =`<a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
-        <h5 class="text-primary">${item.producto.marca} ${item.producto.modelo}</h5`;
+        <h5 class="text-primary">${item.marca} ${item.modelo}</h5`;
         let divProd4 = document.createElement("div");
         divProd4.className = "d-flex align-items-center";
         divProd4.innerHTML = 
-        `<p class="fw-bold mb-0 me-5 pe-3">Price:${item.producto.precio}$</p>`
+        `<p class="fw-bold mb-0 me-5 pe-3">${item.precio}$</p>`
         let divProd5 = document.createElement("div");
         divProd5.className = "def-number-input number-input safari_only";
         let input = document.createElement("input");
         input.className = "quantity fw-bold text-black";
         input.min = "0";
         input.name = "quantity";
-        input.value = item.cant;
+        input.value = "1";
         input.type = "number";
-        input.id = "input"+item.producto.id;
+        input.id = "input"+item.id;
         let button = document.createElement("button");
         button.className = "minus";
         button.addEventListener('click', ()=>{
@@ -571,7 +606,7 @@ function finalizarCompra() {
             if (cant >=0)
             {
                 input.value = cant;
-                totalInicial = totalInicial-parseFloat(item.producto.precio);
+                totalInicial = totalInicial-parseFloat(item.precio);
                
                 
                 let divTotal=document.getElementById("divTotal");
@@ -590,7 +625,7 @@ function finalizarCompra() {
             input.value = parseInt(input.value)+1;
            
             //totalInicial = totalInicial - producto.precio;
-            totalInicial = totalInicial+parseFloat(item.producto.precio);
+            totalInicial = totalInicial+parseFloat(item.precio);
           
             
             let divTotal=document.getElementById("divTotal");
@@ -659,9 +694,7 @@ function finalizarCompra() {
                         </div>
                       </div>
                     </div>
-                    <p class="mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit <a
-                        href="#!">obcaecati sapiente</a>.</p>
-                    <button type="button" id="fin" class="btn btn-primary btn-block btn-lg">Buy now</button>
+                    <button type="button" id="fin" class="btn btn-warning btn-block btn-lg">Buy now</button>
   
                     <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
                       <a href="products.html" id="continueShopping"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
@@ -683,7 +716,12 @@ function finalizarCompra() {
 
     let fin = document.getElementById("fin");
     fin.addEventListener('click', () => {
-        Swal.fire("Thanks for shopping Electric HQ");
+        Swal.fire("Thanks for shopping Electric HQ");        
+        localStorage.clear();
+        setTimeout(()=>{
+            window.location.replace("../index.html");
+        }, 3000);
+        
     })
 
 
