@@ -25,13 +25,19 @@
 <body class="body">
     <header class="header">
         <!-- es el cuerpo de nuestro sitio, todo tiene que estar comprendido en el body-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light col-12 ">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
                     <img src="images/logo.png" alt="logoImage" width="30" height="24"
                         class="d-inline-block align-text-top rounded-circle">
                     ELECTRIC-HQ
                 </a>
+                <div id="carrito" style="list-style-type: none;" >
+                    
+                </div>
+                <div id="cantidad" style="list-style-type: none;" class="centrado">
+                    <p></p>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -58,7 +64,7 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid m-0 w-100">
+    <div class="container-fluid m-0 w-100" id="principal">
         <div class="row m-0">
             <main class="main col-12">
 
@@ -136,6 +142,10 @@
         </footer>
     </div>
    <!-- <script src="script.js"></script>-->
+<script src="../carrito.js"></script>
+<script src="../productos.js"></script>   
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
