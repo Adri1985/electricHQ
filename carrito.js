@@ -15,7 +15,7 @@ function mostrarCarrito()
 
        
         let carro=document.createElement("img");
-            carro.src="images/cart.png"
+            carro.src="/images/cart.png"
             carro.addEventListener('click',()=>{
                 if(carritoArray.length>0){
                     finalizarCompra();
