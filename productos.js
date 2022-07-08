@@ -27,13 +27,13 @@ function obtenerProductosJson() {
 
     console.log("antes del fetch");
     let URLJSON = "";
-    if(pagina=="index.html")
+    if(pagina=="products.html")
     {
-        URLJSON = "./productos.json"
+        URLJSON = "../productos.json"
     }
     else
     {
-        URLJSON = "../productos.json"
+        URLJSON = "./productos.json"
     }
     
     console.log("URL JSON "+URLJSON);
