@@ -9,10 +9,33 @@ let encontrado;
 let carrito=[];
 
 
+console.log("locacion" +location);
+let arrayPrueba =[];
+
+let path = location.toString();
+
+arrayPath= path.split('/');
+
+console.log(arrayPath);
+
+let pagina = arrayPath.pop();
+
+console.log("pagina "+pagina);
+
+
 function obtenerProductosJson() {
 
     console.log("antes del fetch");
-    const URLJSON = "../../productos.json";
+    let URLJSON = "";
+    if(pagina=="index.html")
+    {
+        URLJSON = "./productos.json"
+    }
+    else
+    {
+        URLJSON = "../productos.json"
+    }
+    
     console.log("URL JSON "+URLJSON);
     fetch(URLJSON)
         .then((respuesta) => respuesta.json())
