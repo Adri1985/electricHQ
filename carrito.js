@@ -2,7 +2,6 @@ function mostrarCarrito()
 {   
         console.log("entra en mostrar carrito "+carritoArray.length);
         let carritoDom = document.getElementById("carrito");
-        carritoDom.innerHTML = "";
         let cant=document.getElementById("cantidad");
         cant.innerHTML="";
         
@@ -14,8 +13,7 @@ function mostrarCarrito()
         
 
        
-        let carro=document.createElement("img");
-            carro.src="/images/cart.png"
+        let carro=document.getElementById("img");
             carro.addEventListener('click',()=>{
                 if(carritoArray.length>0){
                     finalizarCompra();
@@ -26,7 +24,7 @@ function mostrarCarrito()
 
                 
             });
-            carritoDom.appendChild(carro);
+          
             
 }
 mostrarCarrito();
