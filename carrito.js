@@ -27,4 +27,5 @@ function mostrarCarrito()
           
             
 }
+
 mostrarCarrito();

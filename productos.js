@@ -21,20 +21,17 @@ console.log(arrayPath);
 let pagina = arrayPath.pop();
 
 console.log("pagina "+pagina);
+let ruta="";
+if(pagina !="index.html"){
+    ruta = "../";
+}
+
 
 
 function obtenerProductosJson() {
 
     console.log("antes del fetch");
-    let URLJSON = "";
-    if(pagina=="products.html")
-    {
-        URLJSON = "../productos.json"
-    }
-    else
-    {
-        URLJSON = "./productos.json"
-    }
+    const URLJSON = ruta+"productos.json";
     
     console.log("URL JSON "+URLJSON);
     fetch(URLJSON)
@@ -540,7 +537,7 @@ function finalizarCompra() {
         let divProd2 = document.createElement("div");
         divProd2.className = "flex-shrink-0";
         let imageProd = document.createElement("img");
-        imageProd.src = "../images/" + item.imageName;
+        imageProd.src = ruta+"images/"+item.imageName;
         imageProd.className = "img-fluid";
         imageProd.style = "width: 150px;"
         imageProd.alt = "Generic placeholder image"
