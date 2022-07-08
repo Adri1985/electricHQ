@@ -8,9 +8,12 @@ let carritoArrayFinal =[];
 let encontrado;
 let carrito=[];
 
+
 function obtenerProductosJson() {
+
     console.log("antes del fetch");
-    const URLJSON = "../productos.json";
+    const URLJSON = "../../productos.json";
+    console.log("URL JSON "+URLJSON);
     fetch(URLJSON)
         .then((respuesta) => respuesta.json())
         .then((data) => {
