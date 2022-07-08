@@ -148,11 +148,7 @@ function validations() {
     let minRange = document.getElementById("minRange");
     let maxRange = document.getElementById("maxRange");
     let countries = document.getElementById("countries");
-    let newCheck = document.getElementById("new");
-    let preOwnedCheck = document.getElementById("preowned");
     countries.disabled = true;
-    preOwnedCheck.disabled = true;
-    newCheck.disabled = true;
 
     minPrecio.addEventListener('input', () => {
         if (isNaN(minPrecio.value)) {
@@ -327,44 +323,28 @@ function buscar() {
 }
 
 function listProducts(lista) {
-
- 
     let container = document.getElementById("products");
     container.innerHTML = ``;
     let product;
-
     for (const producto of lista) {
         // Desesctructuracion del objeto producto
         let { precio, rango, imageName, topFeature1, topFeature2, topFeature3, id, modelo, marca } = producto;
-
         console.log("id que llega " + producto.id + " liked o no " + producto.liked);
         product = document.createElement("div");
         product.className = "product";
         let card = document.createElement("div");
         card.className = "card";
         card.style = "width: 100%";
-
         let likeCont = document.createElement("div");
         likeCont.className = "likeDiv";
-
-
         let liked = document.createElement("img");
-
         //Uso de operador ternario
-        producto.liked == "Y" ? liked.src = "../images/liked.png" : liked.src = "../images/unliked.png";
-        /*if(producto.liked =="Y")
-        {
-            liked.src= "../images/liked.png";
-        }
-        else{
-            liked.src= "../images/unliked.png";
-        }*/
+        producto.liked == "Y" ? liked.src = "../images/liked.png" : liked.src = "../images/unliked.png"; 
         liked.id = "like" + id;
         console.log("en la creacion " + liked.id);
         liked.className = "bi bi-card-image"
         likeCont.appendChild(liked);
         //Desestructuracion de producto tomando solo imageName
-
         console.log("imagen luego de desesctructuracion " + imageName)
         let image = document.createElement("img");
         image.src = "../images/" + imageName;
@@ -376,13 +356,11 @@ function listProducts(lista) {
         <p class="card-text">Top features include:</p>`;
         let listGroup = document.createElement("ul");
         listGroup.className = "list-group list-group-flush";
-
         listGroup.innerHTML = `<li class="list-group-item">${topFeature1}</li>
         <li class="list-group-item">${topFeature2}</li>
         <li class="list-group-item">${topFeature3}</li>
         <li class="list-group-item">Price: $${precio}</li>
         <li class="list-group-item">Max Range: ${rango} Miles</li>`
-
         let buttonBuy = document.createElement("a");
         if (carritoArray.some((el) => el.id == producto.id)) 
         {
@@ -394,7 +372,6 @@ function listProducts(lista) {
             buttonBuy.className = "btn btn-warning";
             buttonBuy.textContent = "ADD TO CART";
         }
-       
         buttonBuy.id = "buy" + id;
         let buttonReview = document.createElement("a");
         buttonReview.className = "btn btn-light";

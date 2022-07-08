@@ -29,3 +29,4 @@ function mostrarCarrito()
             carritoDom.appendChild(carro);
             
 }
+mostrarCarrito();
