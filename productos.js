@@ -2,7 +2,7 @@ let likedIds = [];
 let carritoStorage =[];
 
 const productos = [];
-let carritoArray = [];
+var carritoArray = [];
 let carritoArrayFinal =[];
 
 let encontrado;
@@ -42,11 +42,15 @@ function obtenerProductosJson() {
                 productos.push(new Producto(producto.id, producto.marca, producto.modelo, producto.tipo, producto.rango, producto.precio, producto.topFeature1, producto.topFeature2, producto.topFeature3, producto.imageName, producto.liked));
             }
             console.log("productos de json " + productos);
+            setInterval(console.log("waiting for productos", 1000));
             setFromStorage();
             mostrarCarrito();
-            createSelectType();
+            
             listProducts(productos);
+           
+            createSelectType(); 
             validations();
+           
             
 
         })
@@ -55,6 +59,40 @@ function obtenerProductosJson() {
 
 obtenerProductosJson();
 
+function setFromStorage() {
+    console.log("entra en set from storage");
+    let likedArrayFromStorage = localStorage.getItem("liked");
+    let cartFromStorage = localStorage.getItem("cart");
+    if (likedArrayFromStorage != null) {
+        likedIds = JSON.parse(likedArrayFromStorage);
+        console.log("likeIds");
+
+
+        for (const producto of productos) {
+            for (i = 0; i < likedIds.length; i++) {
+                if (producto.id == likedIds[i]) {
+                    producto.liked = "Y";
+                }
+            }
+
+        }
+
+    }
+    if(cartFromStorage != null){
+        cart = JSON.parse(cartFromStorage);
+        console.log("from storage cart "+cart);
+        for(const producto of productos){
+            for (i = 0; i < cart.length; i++) {
+                if (producto.id == cart[i]) {
+                    carritoArray.push(producto)
+                    carritoStorage.push(producto.id);
+                }
+            }
+
+        }
+        console.log("storage carrito "+carritoArray.length);
+    }
+}
 
 class Producto {
     constructor(id, marca, modelo, tipo, rango, precio, topFeature1, topFeature2, topFeature3, imageName, liked) {
@@ -81,37 +119,7 @@ class CarritoItem{
 
 
 
-function setFromStorage() {
-    let likedArrayFromStorage = localStorage.getItem("liked");
-    let cartFromStorage = localStorage.getItem("cart");
-    if (likedArrayFromStorage != null) {
-        likedIds = JSON.parse(likedArrayFromStorage);
-        console.log("likeIds");
 
-
-        for (const producto of productos) {
-            for (i = 0; i < likedIds.length; i++) {
-                if (producto.id == likedIds[i]) {
-                    producto.liked = "Y";
-                }
-            }
-
-        }
-
-    }
-    if(cartFromStorage != null){
-        cart = JSON.parse(cartFromStorage);
-        for(const producto of productos){
-            for (i = 0; i < cart.length; i++) {
-                if (producto.id == cart[i]) {
-                    carritoArray.push(producto);
-                }
-            }
-
-        }
-        console.log("storage carrito "+carritoArray.length);
-    }
-}
 
 
 //createSelectType va a crear el primer drop down dentro del formulario de producto, listando solo aquellos tipos de productos en stock
@@ -480,9 +488,13 @@ function listProducts(lista) {
                     producto.tipo + " " + producto.modelo + " " + "agregado al carrito");
                     let iteracion;
                     let total = 0;
+                    console.log("antes de agregar al storage"+ carritoStorage);
                     carritoStorage.push(producto.id);
+                    console.log("despues del push al storage"+ carritoStorage);
                     localStorage.setItem("cart", JSON.stringify(carritoStorage));
+
                     carritoArray.push(producto); 
+
                     console.log("longitud del carrito "+ carritoArray.length);
                     botCart.className = "btn btn-secondary";
                     botCart.textContent ="REMOVE FROM CART";
@@ -658,7 +670,7 @@ function finalizarCompra() {
                     <button type="button" id="fin" class="btn btn-warning btn-block btn-lg">Buy now</button>
   
                     <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
-                      <a href="/pages/products.html" id="continueShopping"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
+                      <a href="${ruta}/pages/products.html" id="continueShopping"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
                     </h5>`
     // sigue a la par del div 7 
 

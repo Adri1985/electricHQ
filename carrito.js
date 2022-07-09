@@ -1,7 +1,6 @@
 function mostrarCarrito()
 {   
         console.log("entra en mostrar carrito "+carritoArray.length);
-        let carritoDom = document.getElementById("carrito");
         let cant=document.getElementById("cantidad");
         cant.innerHTML="";
         
