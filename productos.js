@@ -51,6 +51,7 @@ function obtenerProductosJson() {
            
             createSelectType(); 
             validations();
+            setLikeButton()
            
             
 
@@ -59,6 +60,17 @@ function obtenerProductosJson() {
 }
 
 obtenerProductosJson();
+
+
+function setLikeButton()
+{
+    let showLikes =document.getElementById("likes");
+    showLikes.addEventListener('click',()=>{
+        const resultado = productos.filter((el) => el.liked.toLowerCase() == "y");
+        console.log("likeados");
+        listProducts(resultado);
+    })
+}
 
 function setFromStorage() {
     console.log("entra en set from storage");
@@ -163,9 +175,6 @@ function createSelectType() {
         select.innerHTML = select.innerHTML + `<option value="${iteracion}">${tipo.tipo}</option>`
         console.log("iteracion " + iteracion);
     }
-    iteracion++;
-    select.innerHTML = select.innerHTML + `<option value="${iteracion}">My Favorites</option>`;
-
     console.log("iteracion fuera " + iteracion);
 
     types.prepend(select);
@@ -184,41 +193,66 @@ function validations() {
 
     minPrecio.addEventListener('input', () => {
         if (isNaN(minPrecio.value)) {
-            alert("el precio debe ser numerico");
+            Toastify({
+                text: "Price must be a number",
+                duration: 1500,
+            }).showToast();
             minPrecio.value = "";
         }
         else if (minPrecio.value < 0) {
-            alert("el precio debe ser mayor a 0");
+            Toastify({
+                text: "Price must be greater than 0",
+                duration: 1500,
+            }).showToast();
+           
             minPrecio.value = "";
         }
     });
     maxPrecio.addEventListener('input', () => {
         if (isNaN(maxPrecio.value)) {
-            alert("el precio debe ser numerico");
+            Toastify({
+                text: "price must be greather than 0",
+                duration: 1500,
+            }).showToast();
             maxPrecio.value = "";
         }
         else if (maxPrecio.value < 0) {
-            alert("el precio debe ser mayor a 0");
+            Toastify({
+                text: "price must be greather than 0",
+                duration: 1500,
+            }).showToast();
             maxPrecio.value = "";
         }
     });
     minRange.addEventListener('input', () => {
         if (isNaN(minRange.value)) {
-            alert("el rango debe ser numerico");
+            Toastify({
+                text: "min range must be a number",
+                duration: 1500,
+            }).showToast();
             minRange.value = "";
         }
         else if (minRange.value < 0) {
-            alert("el rango debe ser mayor a 0");
+            Toastify({
+                text: "min range must be greater than 0",
+                duration: 1500,
+            }).showToast();
             minRange.value = "";
         }
     });
     maxRange.addEventListener('input', () => {
         if (isNaN(maxRange.value)) {
-            alert("el rango debe ser numerico");
+            Toastify({
+                text: "max range must be a number",
+                duration: 1500,
+            }).showToast();
             maxRange.value = "";
         }
         else if (maxRange.value < 0) {
-            alert("el rango debe ser mayor a 0");
+            Toastify({
+                text: "max range must be a number",
+                duration: 1500,
+            }).showToast();
             maxRange.value = "";
         }
     });
@@ -262,6 +296,21 @@ function buscar() {
     let maxPrecioFloat = parseFloat(maxPrecio.value);
     let minRangoFloat = parseFloat(minRange.value);
     let maxRangoFloat = parseFloat(maxRange.value);
+    if(isNaN(minPrecioFloat))
+    {
+        minPrecioFloat=0;
+    }
+    if(isNaN(maxPrecioFloat))
+    {
+        maxPrecioFloat=999999999999;
+    }
+    if(isNaN(minRangoFloat)){
+        minRangoFloat=0;
+    }
+    if(isNaN(maxRangoFloat))
+    {
+        maxRangoFloat=9999999999999;
+    }
 
 
     console.log("min precio antes " + minPrecio.value + " max precio antes " + maxPrecioFloat);
@@ -275,11 +324,8 @@ function buscar() {
 
 
     }
-
-
     let seleccion = document.getElementById("selectTipo");
     let selected = seleccion.options[seleccion.selectedIndex].text;
-
 
     console.log("Seleccionado antes " + selected);
     console.log("por precio " + porPrecio + " por Rango " + porRango + " MinPrecio" + minPrecioFloat + " maxPrecio " + maxPrecioFloat + " minRango " + minRangoFloat + " maxRango " + maxRangoFloat);
@@ -339,13 +385,6 @@ function buscar() {
     }
 
     console.log("lo que esta seleccionado es " + selected.toLowerCase());
-    if (porPrecio == 0 && porRango == 0 && selected.toLowerCase() == "my favorites") // All
-    {
-
-        const resultado = productos.filter((el) => el.liked.toLowerCase() == "y");
-        console.log("likeados");
-        listProducts(resultado);
-    }
 
 
 
@@ -422,11 +461,84 @@ function listProducts(lista) {
         card.appendChild(buttonLike);
         product.appendChild(card);
         container.appendChild(product);
-    }
+        console.log("entra al final " + producto.id);
+        //let botLike = document.getElementById("like" + producto.id);
+        console.log("buscando " + "like" + producto.id);
+        liked.addEventListener('click', () => {
+            if (producto.liked == "Y") {
+                console.log("disliked");
+                producto.liked = "N";
+                liked.src = "../images/unliked.png";
+                likedIds.pop(producto.id);
+                console.log(likedIds);
+                console.log(JSON.stringify(likedIds));
+                localStorage.setItem("liked", JSON.stringify(likedIds));
+                console.log("antes de toastify");
+                Toastify({
+                    text: "Unliked!",
+                    duration: 2000
+                }).showToast();
+                console.log("despues de toastify");
 
+            }
+            else {
+                console.log("liked");
+                producto.liked = "Y";
+                liked.src = "../images/liked.png";
+                likedIds.push(producto.id);
+                console.log(likedIds);
+                console.log(JSON.stringify(likedIds));
+                localStorage.setItem("liked", JSON.stringify(likedIds));
+                Toastify({
+                    text: "Liked!",
+                    duration: 2000,
+                }).showToast();
+            }
+        });
+        //let botCart = document.getElementById("buy" + producto.id);
+        buttonBuy.addEventListener('click',()=>{
+        if(buttonBuy.textContent == "REMOVE FROM CART")
+        {
+            carritoArray.pop(producto);
+            carritoStorage.pop(producto.id);
+            localStorage.setItem("cart", JSON.stringify(carritoStorage));
+            buttonBuy.className ="btn btn-warning";
+            buttonBuy.textContent ="ADD TO CART";
+            mostrarCarrito();
+        }
+        else
+        {
+            console.log("haciendo click en "+producto.id);
+            carritoArray.forEach(element => console.log("nombre "+element.modelo));       
+            if (carritoArray.some((el) => el.id == producto.id)) 
+            {
+                Swal.fire("Product already in cart. You can modify quantity at checkout process");
+            }
+            else
+            {
+                Swal.fire(
+                producto.tipo + " " + producto.modelo + " " + "agregado al carrito");
+                let iteracion;
+                let total = 0;
+                console.log("antes de agregar al storage"+ carritoStorage);
+                carritoStorage.push(producto.id);
+                console.log("despues del push al storage"+ carritoStorage);
+                localStorage.setItem("cart", JSON.stringify(carritoStorage));
+                carritoArray.push(producto); 
+                console.log("longitud del carrito "+ carritoArray.length);
+                buttonBuy.className = "btn btn-secondary";
+                buttonBuy.textContent ="REMOVE FROM CART";
+                mostrarCarrito();
+            }         
+        }
+    
+    
     console.log("likeIds en la carga" + likedIds);
-
-    for (const producto of lista) {
+    });
+    
+    }
+}
+    /*for (const producto of lista) {
         console.log("entra al final " + producto.id);
         let botLike = document.getElementById("like" + producto.id);
         console.log("buscando " + "like" + producto.id);
@@ -505,12 +617,10 @@ function listProducts(lista) {
          
             }
 
-    });
+    });*/
     
     
-}
 
-}
 
 function finalizarCompra() {
    
