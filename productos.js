@@ -693,7 +693,7 @@ function finalizarCompra() {
         Swal.fire("Thanks for shopping Electric HQ");        
         localStorage.clear();
         setTimeout(()=>{
-            window.location.replace("../index.html");
+            window.location.replace(ruta+"index.html");
         }, 3000);
         
     })
