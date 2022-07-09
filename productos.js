@@ -749,7 +749,7 @@ function finalizarCompra() {
         }
         else
         {
-            Swal.fire("Thanks for shopping Electric HQ"); 
+            
             let titulo ="Detalle de su compra: ";
             let resumen =""
         for (const producto of carritoArray)
