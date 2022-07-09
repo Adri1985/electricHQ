@@ -692,6 +692,7 @@ function finalizarCompra() {
     fin.addEventListener('click', () => {
         Swal.fire("Thanks for shopping Electric HQ");        
         localStorage.clear();
+        console.log(ruta+"index.html")
         setTimeout(()=>{
             window.location.replace(ruta+"index.html");
         }, 3000);
