@@ -22,7 +22,7 @@ let pagina = arrayPath.pop();
 
 console.log("pagina "+pagina);
 let ruta="./";
-if(pagina !="index.html"||pagina !=''){
+if(pagina !="index.html"&& pagina !=''){
     ruta = "../";
 }
 console.log("ruta elegida "+ruta);
