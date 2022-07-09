@@ -47,11 +47,16 @@ function obtenerProductosJson() {
             setFromStorage();
             mostrarCarrito();
             
-            listProducts(productos);
-           
-            createSelectType(); 
-            validations();
-            setLikeButton()
+            
+            
+            if(pagina=="products.html")
+            {
+                createSelectType(); 
+                validations();
+                setLikeButton();
+                listProducts(productos);
+            }
+            
            
             
 
@@ -120,6 +125,7 @@ class Producto {
         this.topFeature3 = topFeature3;
         this.imageName = imageName;
         this.liked = liked;
+        this.cantCarrito=1;
     }
 }
 
@@ -538,87 +544,7 @@ function listProducts(lista) {
     
     }
 }
-    /*for (const producto of lista) {
-        console.log("entra al final " + producto.id);
-        let botLike = document.getElementById("like" + producto.id);
-        console.log("buscando " + "like" + producto.id);
-        botLike.addEventListener('click', () => {
-            if (producto.liked == "Y") {
-                console.log("disliked");
-                producto.liked = "N";
-                botLike.src = "../images/unliked.png";
-                likedIds.pop(producto.id);
-                console.log(likedIds);
-                console.log(JSON.stringify(likedIds));
-                localStorage.setItem("liked", JSON.stringify(likedIds));
-                console.log("antes de toastify");
-                Toastify({
-                    text: "Unliked!",
-                    duration: 2000
-                }).showToast();
-                console.log("despues de toastify");
-
-            }
-
-            else {
-                console.log("liked");
-                producto.liked = "Y";
-                botLike.src = "../images/liked.png";
-                likedIds.push(producto.id);
-                console.log(likedIds);
-                console.log(JSON.stringify(likedIds));
-                localStorage.setItem("liked", JSON.stringify(likedIds));
-                Toastify({
-                    text: "Liked!",
-                    duration: 2000,
-                }).showToast();
-            }
-        });
-        let botCart = document.getElementById("buy" + producto.id);
-
-        botCart.addEventListener('click',()=>{
-            if(botCart.textContent == "REMOVE FROM CART")
-            {
-                carritoArray.pop(producto);
-                carritoStorage.pop(producto.id);
-                localStorage.setItem("cart", JSON.stringify(carritoStorage));
-                botCart.className ="btn btn-warning";
-                botCart.textContent ="ADD TO CART";
-                mostrarCarrito();
-            }
-            else
-            {
-                console.log("haciendo click en "+producto.id);
-                carritoArray.forEach(element => console.log("nombre "+element.modelo));
-        
-                if (carritoArray.some((el) => el.id == producto.id)) 
-                {
-                    Swal.fire("Product already in cart. You can modify quantity at checkout process");
-                }
-                else
-                {
-                    Swal.fire(
-                    producto.tipo + " " + producto.modelo + " " + "agregado al carrito");
-                    let iteracion;
-                    let total = 0;
-                    console.log("antes de agregar al storage"+ carritoStorage);
-                    carritoStorage.push(producto.id);
-                    console.log("despues del push al storage"+ carritoStorage);
-                    localStorage.setItem("cart", JSON.stringify(carritoStorage));
-
-                    carritoArray.push(producto); 
-
-                    console.log("longitud del carrito "+ carritoArray.length);
-                    botCart.className = "btn btn-secondary";
-                    botCart.textContent ="REMOVE FROM CART";
-                    mostrarCarrito();
-                }
-            
-         
-            }
-
-    });*/
-    
+  
     
 
 
@@ -650,8 +576,10 @@ function finalizarCompra() {
     div7.appendChild(title);
     let divProd1;
     let totalInicial=0;
+    let pos=0;
 
     for (const item of carritoArray) {
+        carritoArrayFinal.push(new CarritoItem(item, 10));
         console.log("pasa por carrito");
         totalInicial=totalInicial+parseFloat(item.precio);
         console.log("totalInicial"+ totalInicial);
@@ -691,7 +619,11 @@ function finalizarCompra() {
             {
                 input.value = cant;
                 totalInicial = totalInicial-parseFloat(item.precio);
-               
+
+               console.log("producto y cantidad"+item.modelo+" cant "+item.cantCarrito);
+               item.cantCarrito--;
+               console.log("producto y cantidad despues del click"+item.modelo+" cant "+item.cantCarrito);
+
                 
                 let divTotal=document.getElementById("divTotal");
                 divTotal.innerHTML=`<h4 class="fw-bold mb-0 totales">Total:</h4>
@@ -707,7 +639,8 @@ function finalizarCompra() {
         button2.addEventListener('click', ()=>{
             console.log("click plus");
             input.value = parseInt(input.value)+1;
-           
+            item.cantCarrito++;
+            console.log("producto y cantidad despues del click"+item.modelo+" cant "+item.cantCarrito);
             //totalInicial = totalInicial - producto.precio;
             totalInicial = totalInicial+parseFloat(item.precio);
           
@@ -727,7 +660,7 @@ function finalizarCompra() {
         divProd1.appendChild(divProd2);
         divProd1.appendChild(divProd2);
         div7.appendChild(divProd1);
-
+        pos++;
         
        
         
@@ -754,13 +687,16 @@ function finalizarCompra() {
     <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase" style="color:black;">Payment </h3>
                   <form class="mb-5">
                     <div class="form-outline mb-5">
+                    <input type="email" id="email" name="email" id="typemail" class="form-control form-control-lg" siez="17"
+                    value="" minlength="5" maxlength="99" />
+                  <label class="form-label" for="typeText">Ingrese su mail</label>
                       <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
                         value="1234 5678 9012 3457" minlength="19" maxlength="19" />
                       <label class="form-label" for="typeText">Card Number</label>
                     </div>
                     <div class="form-outline mb-5">
-                      <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
-                        value="John Smith" />
+                      <input type="text" id="typeName" class="form-control form-control-lg" siez="17" required
+                        value="" />
                       <label class="form-label" for="typeName">Name on card</label>
                     </div>
                     <div class="row">
@@ -801,12 +737,59 @@ function finalizarCompra() {
 
     let fin = document.getElementById("fin");
     fin.addEventListener('click', () => {
-        Swal.fire("Thanks for shopping Electric HQ");        
+
+               
+        let mail = document.getElementById("email").value;
+        let nombre = document.getElementById("typeName".value);
+        console.log("nombre "+nombre);
+        if (mail =="" || nombre =="")
+        {   
+            Swal.fire("Name and email are mandatory")
+
+        }
+        else
+        {
+            Swal.fire("Thanks for shopping Electric HQ"); 
+            let titulo ="Detalle de su compra: ";
+            let resumen =""
+        for (const producto of carritoArray)
+        {
+            resumen = resumen+producto.cantCarrito+"X "+producto.tipo+" "+producto.modelo+"\nPrecio: "+producto.precio+"$     /";
+
+        }
+        resumen = resumen +"\n";
+        let total= "Total de su compra: $"+totalInicial;
+        let saludo = "Equipo de ElectricHQ"
+        console.log(resumen);
+        
+        var templateParams = {
+            correo: mail,
+            from: nombre,
+            title:titulo,
+            mensaje:resumen,
+            totals:total,
+            greeting:saludo
+           
+          };
+
+          
+          emailjs.send("default_service", "template_3lckjpo", templateParams).then(
+            function (response) {
+              console.log("SUCCESS!", response.status, response.text);
+            },
+            function (error) {
+              console.log("FAILED...", error);
+            }
+          );
+
         localStorage.clear();
+        Swal.fire("Thanks for shopping ElectricHQ! you will send your purchase summary to your email.")
         console.log(ruta+"index.html")
         setTimeout(()=>{
             window.location.replace(ruta+"index.html");
         }, 3000);
+        }
+        
         
     })
 
