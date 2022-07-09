@@ -21,7 +21,7 @@ console.log(arrayPath);
 let pagina = arrayPath.pop();
 
 console.log("pagina "+pagina);
-let ruta="";
+let ruta="./";
 if(pagina !="index.html"){
     ruta = "../";
 }
@@ -622,6 +622,7 @@ function finalizarCompra() {
         
 
     }
+    console.log("ruta "+ruta);
   
     divTotal = document.createElement("div");
     divTotal.id="divTotal";
