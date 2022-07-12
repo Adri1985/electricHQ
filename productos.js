@@ -565,6 +565,7 @@ function finalizarCompra() {
                       </div>
                     </div>
                     <button type="button" id="fin" class="btn btn-warning btn-block btn-lg">Buy now</button>
+                    <button type="button" id="empty" class="btn btn-info btn-block btn-lg">Empty Cart</button>
   
                     <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
                       <a href="${ruta}/pages/products.html" id="continueShopping"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
@@ -578,6 +579,15 @@ function finalizarCompra() {
     div1.appendChild(div2);
     sectionPrincipal.appendChild(div1); 
     contenedorCheckout.appendChild(sectionPrincipal);
+    let clear = document.getElementById("empty");
+    clear.addEventListener('click', ()=>{
+        localStorage.removeItem('cart');
+        Swal.fire("Cart cleared.")
+        setTimeout(()=>{
+            window.location.replace(ruta+"pages/products.html");
+        }, 2000);
+
+    })
     let fin = document.getElementById("fin");
     fin.addEventListener('click', () => {          
         let mail = document.getElementById("email").value;
@@ -621,7 +631,6 @@ function finalizarCompra() {
 
         localStorage.clear();
         Swal.fire("Thanks for shopping ElectricHQ! you will send your purchase summary to your email.")
-        console.log(ruta+"index.html")
         setTimeout(()=>{
             window.location.replace(ruta+"index.html");
         }, 3000);
