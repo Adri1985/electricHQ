@@ -44,7 +44,10 @@ function setLikeButton()// setea los likes
     let showLikes =document.getElementById("likes");
     showLikes.addEventListener('click',()=>{
         const resultado = productos.filter((el) => el.liked.toLowerCase() == "y");
-        console.log("likeados");
+        Toastify({
+            text: "Showing liked products",
+            duration: 1500,
+        }).showToast();
         listProducts(resultado);
     })
 }
